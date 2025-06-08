@@ -1,3 +1,8 @@
+![example workflow](https://github.com/rudini/blogapp-20/actions/workflows/azure-static-web-apps-nice-bay-047dd2803.yml/badge.svg)
+![example workflow](https://github.com/rudini/blogapp-20/actions/workflows/ng-update.yaml/badge.svg)
+![example workflow](https://github.com/rudini/blogapp-20/actions/workflows/codeql.yml/badge.svg)
+![example workflow](https://github.com/rudini/blogapp-20/actions/workflows/dependabot/dependabot-updates/badge.svg)
+
 # Blogapp20
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.1.
