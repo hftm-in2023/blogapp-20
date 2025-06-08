@@ -1,7 +1,7 @@
-![example workflow](https://github.com/rudini/blogapp-20/actions/workflows/azure-static-web-apps-nice-bay-047dd2803.yml/badge.svg)
-![example workflow](https://github.com/rudini/blogapp-20/actions/workflows/ng-update.yaml/badge.svg)
-![example workflow](https://github.com/rudini/blogapp-20/actions/workflows/codeql.yml/badge.svg)
-![example workflow](https://github.com/rudini/blogapp-20/actions/workflows/dependabot/dependabot-updates/badge.svg)
+![example workflow](https://github.com/hftm-in2023/blogapp-20/actions/workflows/azure-static-web-apps-calm-plant-0066bdd03.yml/badge.svg)
+![example workflow](https://github.com/hftm-in2023/blogapp-20/actions/workflows/ng-update.yml/badge.svg)
+![example workflow](https://github.com/hftm-in2023/blogapp-20/actions/workflows/codeql.yml/badge.svg)
+![example workflow](https://github.com/hftm-in2023/blogapp-20/actions/workflows/dependabot/dependabot-updates/badge.svg)
 
 # Blogapp20
 
