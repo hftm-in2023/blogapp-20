@@ -1,12 +1,15 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Demo } from './core/demo/demo';
 
 @Component({
-  selector: 'app-root',
-  imports: [RouterOutlet],
+  selector: 'App',
+  imports: [Demo],
   templateUrl: './app.html',
-  styleUrl: './app.scss'
+  styleUrl: './app.scss',
 })
 export class App {
+  onModeChange($event: string) {
+    console.log(`event fired ${$event}`);
+  }
   protected title = 'blogapp-20';
 }
