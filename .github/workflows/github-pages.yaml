@@ -17,12 +17,14 @@ jobs:
         with:
           node-version: 20.19.1
 
-      - name: Build Angular app to prod
-        run: npm install && npm run build --base-href blogapp-20
+      - name: Install dependencies and build Angular app
+        run: |
+          npm install
+          npm run build -- --base-href /blogapp-20/
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: dist/blogapp-20/browser
-          branch: prod  
+          branch: prod
           token: ${{ secrets.GITHUB_TOKEN }}
