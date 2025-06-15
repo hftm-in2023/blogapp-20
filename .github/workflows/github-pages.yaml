@@ -18,7 +18,7 @@ jobs:
           node-version: 20.19.1
 
       - name: Build Angular app to prod
-        run: npm install && npm run build --base-href /blogapp-20/
+        run: npm install && npm run build --base-href blogapp-20
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
