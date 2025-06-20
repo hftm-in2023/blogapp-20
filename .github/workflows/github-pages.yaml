@@ -1,0 +1,34 @@
+name: Angular Build and Deploy
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.19.1
+          cache: 'npm'
+          cache-dependency-path: package-lock.json
+
+      - name: Install dependencies and build Angular app
+        run: |
+          npm ci
+          npm run build -- --base-href /blogapp-20/
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dist/blogapp-20/browser
+          branch: prod
+          token: ${{ secrets.GITHUB_TOKEN }}
