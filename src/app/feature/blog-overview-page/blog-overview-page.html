@@ -1,0 +1,12 @@
+@if (model()) {
+<div class="blog-container">
+  @for (blog of model().data; track blog.id; let i = $index) {
+  <BlogCard
+    [index]="i"
+    [model]="blog"
+    [routeCommands]="['/detail/', blog.id]"
+    (likeBlog)="likeBlog($event)"
+  />
+  }
+</div>
+}
