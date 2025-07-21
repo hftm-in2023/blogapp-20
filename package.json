@@ -30,7 +30,7 @@
     "@angular/forms": "^20.1.0",
     "@angular/material": "^20.1.0",
     "@angular/platform-browser": "^20.1.0",
-    "@angular/router": "^20.1.0",
+    "@angular/router": "^20.1.2",
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
     "rxjs": "~7.8.0",
