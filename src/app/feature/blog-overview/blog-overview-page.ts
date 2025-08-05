@@ -25,8 +25,8 @@ type Model = {
   templateUrl: './blog-overview-page.html',
   styleUrl: './blog-overview-page.scss',
 })
-export class BlogOverviewPage {
-  model = model.required<Model>({});
+export default class BlogOverviewPage {
+  protected readonly model = model.required<Model>({});
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   likeBlog($event: { id: number; likedByMe: boolean }) {

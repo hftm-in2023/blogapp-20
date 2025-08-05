@@ -33,7 +33,7 @@ export type Entries = z.infer<typeof EntriesSchema>;
 @Injectable({
   providedIn: 'root',
 })
-export class BlogBackendService {
+export class BlogBackend {
   readonly #httpClient = inject(HttpClient);
 
   getBlogPosts(): Observable<Entries> {

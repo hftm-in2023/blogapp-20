@@ -20,7 +20,7 @@ import { MatCardModule } from '@angular/material/card';
   templateUrl: './demo.html',
   styleUrl: './demo.scss',
 })
-export class Demo {
+export default class Demo {
   mode = model<ProgressBarMode>('determinate');
   value = model<number>();
   bufferValue = 75;

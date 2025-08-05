@@ -6,6 +6,6 @@ import { Component, input } from '@angular/core';
   templateUrl: './blog-detail-page.html',
   styleUrl: './blog-detail-page.scss',
 })
-export class BlogDetailPage {
-  id = input.required<number>();
+export default class BlogDetailPage {
+  protected readonly id = input.required<number>();
 }

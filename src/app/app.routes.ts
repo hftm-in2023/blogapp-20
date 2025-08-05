@@ -1,11 +1,11 @@
 import { inject } from '@angular/core';
 import { ResolveFn, Routes } from '@angular/router';
 import { lastValueFrom } from 'rxjs';
-import { BlogBackendService, Entries } from './core/services/backend-service';
+import { BlogBackend, Entries } from './core/backend/blog-backend';
 import { PageNotFound } from './core/static/page-not-found';
 
 export const entriesResolver: ResolveFn<Entries> = async () => {
-  const blogBackendService = inject(BlogBackendService);
+  const blogBackendService = inject(BlogBackend);
   return await lastValueFrom(blogBackendService.getBlogPosts());
 };
 
@@ -17,23 +17,17 @@ export const APP_ROUTES: Routes = [
   },
   {
     path: 'demo',
-    loadComponent: () => import('./feature/demo/demo').then((c) => c.Demo),
+    loadComponent: () => import('./feature/demo/demo'),
   },
   {
     path: 'overview',
-    loadComponent: () =>
-      import('./feature/blog-overview-page/blog-overview-page').then(
-        (c) => c.BlogOverviewPage,
-      ),
+    loadComponent: () => import('./feature/blog-overview/blog-overview-page'),
     resolve: { model: entriesResolver },
     runGuardsAndResolvers: 'always',
   },
   {
     path: 'detail/:id',
-    loadComponent: () =>
-      import('./feature/blog-detail-page/blog-detail-page').then(
-        (c) => c.BlogDetailPage,
-      ),
+    loadComponent: () => import('./feature/blog-detail/blog-detail-page'),
   },
   {
     path: 'error',
