@@ -29,9 +29,9 @@ export type Blog = {
   imports: [MatCardModule, RouterLink, MatButtonModule, MatIconModule, NgStyle],
 })
 export class BlogCard {
-  model = input.required<Blog>();
-  index = input.required<number>();
-  routeCommands = input.required<[string, number]>();
+  protected readonly model = input.required<Blog>();
+  protected readonly index = input.required<number>();
+  protected readonly routeCommands = input.required<[string, number]>();
 
   likeBlog = output<{
     id: number;

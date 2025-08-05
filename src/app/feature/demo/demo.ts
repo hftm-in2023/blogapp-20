@@ -21,7 +21,7 @@ import { MatCardModule } from '@angular/material/card';
   styleUrl: './demo.scss',
 })
 export default class Demo {
-  mode = model<ProgressBarMode>('determinate');
-  value = model<number>();
-  bufferValue = 75;
+  protected readonly mode = model<ProgressBarMode>('determinate');
+  protected readonly value = model<number>();
+  protected readonly bufferValue = 75;
 }
