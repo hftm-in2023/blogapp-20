@@ -1,0 +1,50 @@
+<mat-card class="blog-card">
+  <mat-card-header [routerLink]="routeCommands()">
+    <mat-card-title class="card-title" data-testid="title"
+      >{{ model().title }}</mat-card-title
+    >
+  </mat-card-header>
+  @defer (on viewport) {
+  <img
+    height="300"
+    class="blog-image"
+    [routerLink]="routeCommands()"
+    mat-card-image
+    src="{{ 'https://picsum.photos/seed/' + model().id + '/348/300' }}"
+    alt="Random Photo"
+  />
+  } @placeholder {
+  <img alt="image of the blog" height="300" class="blog-image" />
+  }
+  <mat-card-content>
+    <p>{{ model().contentPreview }}</p>
+  </mat-card-content>
+  <mat-card-footer class="blog-footer">
+    <mat-card-content class="blog-author">
+      <p>{{ model().author }}</p>
+    </mat-card-content>
+    <mat-card-actions MatCardActions.align="end">
+      <button
+        data-testid="like-button"
+        mat-icon-button
+        aria-label="Example icon button with a heart icon"
+        (click)="
+          likeBlog.emit({ id: model().id, likedByMe: model().likedByMe })
+        "
+      >
+        <mat-icon
+          data-testid="like-button-icon"
+          [ngStyle]="{ color: model().likedByMe ? 'red' : 'black' }"
+          >favorite</mat-icon
+        >
+      </button>
+      <button
+        data-testid="share-button"
+        mat-icon-button
+        aria-label="Example icon button with a shareicon"
+      >
+        <mat-icon>share</mat-icon>
+      </button>
+    </mat-card-actions>
+  </mat-card-footer>
+</mat-card>
