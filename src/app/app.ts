@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { HeaderComponent } from './core/layout/header/header';
 import { MatProgressBar } from '@angular/material/progress-bar';
 import { RouterStore } from './core/state/router';
+import { HeaderComponent } from './core/layout/header';
 
 @Component({
   selector: 'App',

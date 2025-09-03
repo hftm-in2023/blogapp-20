@@ -13,7 +13,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
   styles: [
     `
       :host {
-        height: 5rem;
+        height: 4rem;
 
         .header-toolbar {
           display: flex;
