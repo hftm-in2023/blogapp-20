@@ -13,14 +13,20 @@ export class GlobalErrorHandler implements ErrorHandler {
     }
   }
 
-  postCustomData(error: Error, message: string) {
-    const req = new XMLHttpRequest();
-    req.open('POST', `${environment.serviceUrl}/api/report-error/client-fatal`);
-    req.setRequestHeader('Content-Type', 'application/json');
-    req.send(
-      `{ "client-message" : ${JSON.stringify(
-        message || '',
-      )}, "client-error": ${JSON.stringify(error.stack || '')}}`,
-    );
+  async postCustomData(error: Error, message: string) {
+    try {
+      await fetch(`${environment.serviceUrl}/api/report-error/client-fatal`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          'client-message': message || '',
+          'client-error': error.stack || '',
+        }),
+      });
+    } catch (fetchError) {
+      console.error('Failed to report error:', fetchError);
+    }
   }
 }
