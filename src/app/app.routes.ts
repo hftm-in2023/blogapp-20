@@ -1,8 +1,9 @@
 import { inject } from '@angular/core';
 import { ResolveFn, Routes } from '@angular/router';
 import { lastValueFrom } from 'rxjs';
-import { BlogBackend, Entries } from './core/backend/blog-backend';
-import { PageNotFound } from './core/static/page-not-found';
+import { BlogBackend, Entries } from './core/blog/blog-backend';
+import { ERROR_ROUTES } from './core/error';
+import { STATIC_ROUTES } from './core/static';
 
 export const entriesResolver: ResolveFn<Entries> = async () => {
   const blogBackendService = inject(BlogBackend);
@@ -29,9 +30,6 @@ export const APP_ROUTES: Routes = [
     path: 'detail/:id',
     loadComponent: () => import('./feature/blog-detail/blog-detail-page'),
   },
-  {
-    path: 'error',
-    component: Error,
-  },
-  { path: '**', component: PageNotFound },
+  ...ERROR_ROUTES,
+  ...STATIC_ROUTES,
 ];
