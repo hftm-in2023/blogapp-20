@@ -3,7 +3,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 @Component({
-  selector: 'Header',
+  selector: 'BlogHeader',
   template: `
     <mat-toolbar color="primary" class="header-toolbar">
       <span>Blog App</span>
