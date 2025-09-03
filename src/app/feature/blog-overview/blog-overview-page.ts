@@ -1,4 +1,4 @@
-import { Component, model } from '@angular/core';
+import { ChangeDetectionStrategy, Component, model } from '@angular/core';
 import { BlogCard } from '../../shared/blog-card/blog-card';
 
 type Model = {
@@ -24,6 +24,7 @@ type Model = {
   imports: [BlogCard],
   templateUrl: './blog-overview-page.html',
   styleUrl: './blog-overview-page.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class BlogOverviewPage {
   protected readonly model = model.required<Model>({});
