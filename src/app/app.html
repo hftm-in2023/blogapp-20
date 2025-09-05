@@ -7,8 +7,8 @@
 /> -->
 
 <BlogHeader
-  [isAuthenticated]="isAuthenticated"
-  [userData]="userData"
+  [isAuthenticated]="isAuthenticated()"
+  [userData]="userData()"
   (login)="login()"
   (logout)="logout()"
 />
