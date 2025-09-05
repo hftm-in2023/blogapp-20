@@ -1,1 +1,0 @@
-import{Lb as l,Za as o,wb as d,xb as n}from"./chunk-AJBKP6IW.js";var t=class a{static \u0275fac=function(e){return new(e||a)};static \u0275cmp=o({type:a,selectors:[["app-add-blog"]],decls:2,vars:0,template:function(e,s){e&1&&(d(0,"p"),l(1,"add-blog works!"),n())},encapsulation:2})};export{t as default};
