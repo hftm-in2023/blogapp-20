@@ -20,6 +20,16 @@ export class AuthStore {
   isAuthenticated = computed(() => this.#authentication().isAuthenticated);
   userData = computed(() => this.#authentication().userData);
   auth = computed(() => this.#authentication());
+  token = computed(() => this.#authentication().accessToken);
+
+  roles = computed(() => {
+    const token = this.token();
+    if (!token) return null;
+
+    const decodedToken = JSON.parse(atob(token?.split('.')[1]));
+    const roles: string[] = decodedToken?.realm_access?.roles || [];
+    return roles;
+  });
 
   constructor() {
     storeLogger.attachState(this.auth, { name: 'AuthStore' });
