@@ -6,6 +6,7 @@ import {
   NavigationStart,
   Router,
 } from '@angular/router';
+import { storeLogger } from '../dev-tools';
 
 type RouterState = {
   isLoading: boolean;
@@ -25,6 +26,8 @@ export class RouterStore {
   readonly isLoading = computed(() => this.#state().isLoading);
 
   constructor() {
+    storeLogger.attachState(this.#state, { name: 'RouterStore' });
+
     this.#router.events.subscribe((event) => {
       switch (true) {
         case event instanceof NavigationStart: {
