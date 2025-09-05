@@ -6,7 +6,12 @@
   [value]="50"
 /> -->
 
-<BlogHeader />
+<BlogHeader
+  [isAuthenticated]="isAuthenticated()"
+  [userData]="userData()"
+  (login)="login()"
+  (logout)="logout()"
+/>
 @if (isLoading()) {
 <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 } @else {
