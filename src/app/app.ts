@@ -20,8 +20,8 @@ export class App {
   }
   protected title = 'blogapp-20';
 
-  isAuthenticated = this.#authStore.isAuthenticated();
-  userData = this.#authStore.userData();
+  isAuthenticated = this.#authStore.isAuthenticated;
+  userData = this.#authStore.userData;
 
   login() {
     this.#authStore.login();
