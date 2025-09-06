@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, model } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { BlogCard } from '../../shared/blog-card/blog-card';
 
 type Model = {
@@ -27,7 +27,7 @@ type Model = {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class BlogOverviewPage {
-  protected readonly model = model.required<Model>({});
+  protected readonly model = input.required<Model>({});
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   likeBlog($event: { id: number; likedByMe: boolean }) {
