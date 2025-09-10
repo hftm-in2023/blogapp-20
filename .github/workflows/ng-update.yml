@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Updating ng dependencies # the magic happens here !
-        uses: fast-facts/ng-update@v1
+        uses: fast-facts/ng-update@7840d6c5dfb881a162e7d49a7c4517d3943e25d0 # v1
         with:
           base-branch: main
           repo-token: ${{ secrets.GITHUB_TOKEN }}
