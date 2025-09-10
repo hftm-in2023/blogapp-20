@@ -21,7 +21,6 @@ Once the server is running, open your browser and navigate to `http://localhost:
 
 The website is deployed to: `https://calm-plant-0066bdd03.6.azurestaticapps.net`
 
-
 ## Code scaffolding
 
 Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
