@@ -33,7 +33,7 @@
     "@angular/router": "^20.2.4",
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
-    "angular-auth-oidc-client": "19.0.2",
+    "angular-auth-oidc-client": "20.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zod": "^4.1.5",
