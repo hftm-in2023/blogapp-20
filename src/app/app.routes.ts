@@ -15,7 +15,7 @@ const authGuard: CanActivateFn = async () => {
   const authStore = inject(AuthStore);
   const roles = await authStore.roles();
   console.log('User Roles from Auth Guard', roles);
-  return authStore.isAuthenticated() && roles?.includes('ddd')
+  return authStore.isAuthenticated() && roles?.includes('user')
     ? true
     : (authStore.login(), false);
 };
