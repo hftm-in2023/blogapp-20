@@ -1,4 +1,7 @@
 name: "Update Angular Action"
+permissions:
+  contents: read
+  pull-requests: write
 on: # when the action should run. Can also be a CRON or in response to external events. see https://git.io/JeBz1
   schedule:
     - cron: "30 5 * * 3"
