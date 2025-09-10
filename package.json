@@ -10,7 +10,8 @@
     "test:ci": "ng test --watch=false --browsers=ChromeHeadless --code-coverage",
     "lint": "ng lint",
     "format": "npx prettier --write ./src/app/*",
-    "prepare": "husky"
+    "prepare": "husky",
+    "analyze:deps:all": "madge src/main.ts --ts-config tsconfig.json --image ./deps/blogapp-20/_all.png"
   },
   "commitlint": {
     "extends": [
@@ -40,7 +41,7 @@
     "zone.js": "~0.15.0"
   },
   "devDependencies": {
-    "@angular/build": "^20.2.2",
+    "@angular/build": "^20.1.6",
     "@angular/cli": "^20.2.2",
     "@angular/compiler-cli": "^20.2.4",
     "@types/jasmine": "~5.1.0",
@@ -54,6 +55,7 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "lint-staged": "^16.1.6",
+    "madge": "^8.0.0",
     "ng-mocks": "^14.13.5",
     "prettier": "^3.6.2",
     "typescript": "~5.8.2",
