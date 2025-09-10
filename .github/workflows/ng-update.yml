@@ -1,6 +1,6 @@
 name: "Update Angular Action"
 permissions:
-  contents: read
+  contents: write
   pull-requests: write
 on: # when the action should run. Can also be a CRON or in response to external events. see https://git.io/JeBz1
   schedule:
