@@ -8,6 +8,7 @@ import {
 } from '@angular/router';
 import { storeLogger } from '../dev-tools';
 import { Dispatcher, Loading } from '../events/dispatcher';
+import { filter } from 'rxjs';
 
 type RouterState = {
   isLoading: boolean;
@@ -46,11 +47,11 @@ export class RouterStore {
       }
     });
 
-    this.dispatcher.action$.subscribe((action) => {
-      if (action.type === 'SET_LOADING_STATE') {
+    this.dispatcher.action$
+      .pipe(filter((action) => action.type === 'SET_LOADING_STATE'))
+      .subscribe((action) => {
         this.#setLoadingState((action as Loading).payload.isLoading);
-      }
-    });
+      });
   }
 
   #setLoadingState(value: boolean) {
