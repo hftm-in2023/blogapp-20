@@ -1,4 +1,10 @@
-import { Component, DestroyRef, inject, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  inject,
+  signal,
+} from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   AbstractControl,
@@ -27,6 +33,7 @@ import { Dispatcher } from '../../core/events/dispatcher';
   ],
   templateUrl: './add-blog-page.html',
   styleUrl: './add-blog-page.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class AddBlogPage {
   readonly #destroyRef = inject(DestroyRef);
