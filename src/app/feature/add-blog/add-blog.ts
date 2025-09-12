@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import z from 'zod';
-import { environment } from '../../../environments/environment.development';
+import { environment } from '../../../environments/environment';
 import { lastValueFrom } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
@@ -15,12 +15,12 @@ export type CreatedBlog = z.infer<typeof CreatedBlogSchema>;
   providedIn: 'root',
 })
 export class AddBlogService {
-  httpClient = inject(HttpClient);
+  readonly #httpClient = inject(HttpClient);
 
   addBlog(blog: CreatedBlog) {
     CreatedBlogSchema.parse(blog);
     return lastValueFrom(
-      this.httpClient.post(`${environment.serviceUrl}/entries`, blog),
+      this.#httpClient.post(`${environment.serviceUrl}/entries`, blog),
     );
   }
 }
