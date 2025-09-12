@@ -1,0 +1,42 @@
+:host {
+  .error-message {
+    padding: 1rem;
+    margin: 1rem 0;
+    color: var(--mat-sys-error);
+    background-color: var(--mat-sys-error-container);
+  }
+
+  .mat-icon {
+    padding-right: 5px;
+  }
+
+  .mat-toolbar.mat-primary {
+    position: fixed;
+    top: 0;
+    z-index: 2;
+    cursor: pointer;
+  }
+
+  .submit-button {
+    margin-bottom: 10px;
+    margin-top: 20px;
+  }
+
+  button {
+    width: 200px;
+    margin-left: auto;
+  }
+
+  .blog-input {
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+
+    mat-form-field.mat-mdc-form-field {
+      margin-top: 10px;
+      width: 100%;
+    }
+  }
+}
