@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'BlogHeader',
@@ -16,6 +17,18 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     <mat-toolbar color="primary" class="header-toolbar">
       <span>Blog App</span>
       <span class="spacer"></span>
+
+      @if (canAddBlog()) {
+        <button
+          class="add-blog"
+          mat-raised-button
+          color="accent"
+          routerLink="/add-blog"
+        >
+          Neuen Blog erstellen
+        </button>
+      }
+
       @if (isAuthenticated()) {
         <div
           id="profileImage"
@@ -73,17 +86,28 @@ import { MatTooltipModule } from '@angular/material/tooltip';
           cursor: pointer;
         }
 
+        .add-blog {
+          margin-right: 1rem;
+        }
+
         .spacer {
           flex: 1;
         }
       }
     `,
   ],
-  imports: [MatToolbarModule, MatButtonModule, MatIconModule, MatTooltipModule],
+  imports: [
+    RouterLink,
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule,
+    MatTooltipModule,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
   isAuthenticated = input.required<boolean>();
+  roles = input.required<string[] | null>();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   userData = input.required<any>();
 
@@ -97,4 +121,10 @@ export class HeaderComponent {
         .map((token: string) => token.charAt(0))
         .join('') as string,
   );
+
+  canAddBlog = computed(() => {
+    const authenticated = this.isAuthenticated();
+    const roles = this.roles();
+    return authenticated && roles?.includes('user');
+  });
 }

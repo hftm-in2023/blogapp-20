@@ -7,7 +7,7 @@
   }
 
   .mat-icon {
-    padding-right: 5px;
+    padding-right: 0.3125rem;
   }
 
   .mat-toolbar.mat-primary {
@@ -18,12 +18,12 @@
   }
 
   .submit-button {
-    margin-bottom: 10px;
-    margin-top: 20px;
+    margin-bottom: 0.625rem;
+    margin-top: 1.25rem;
   }
 
   button {
-    width: 200px;
+    width: 12.5rem;
     margin-left: auto;
   }
 
@@ -35,7 +35,7 @@
     width: 80%;
 
     mat-form-field.mat-mdc-form-field {
-      margin-top: 10px;
+      margin-top: 0.625rem;
       width: 100%;
     }
   }
