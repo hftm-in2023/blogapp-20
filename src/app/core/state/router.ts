@@ -7,6 +7,8 @@ import {
   Router,
 } from '@angular/router';
 import { storeLogger } from '../dev-tools';
+import { Dispatcher, Loading } from '../events/dispatcher';
+import { filter } from 'rxjs';
 
 type RouterState = {
   isLoading: boolean;
@@ -21,6 +23,7 @@ const initialState: RouterState = {
 })
 export class RouterStore {
   readonly #router = inject(Router);
+  readonly dispatcher = inject(Dispatcher);
   readonly #state = signal<RouterState>(initialState);
 
   readonly isLoading = computed(() => this.#state().isLoading);
@@ -43,6 +46,12 @@ export class RouterStore {
         }
       }
     });
+
+    this.dispatcher.action$
+      .pipe(filter((action) => action.type === 'SET_LOADING_STATE'))
+      .subscribe((action) => {
+        this.#setLoadingState((action as Loading).payload.isLoading);
+      });
   }
 
   #setLoadingState(value: boolean) {

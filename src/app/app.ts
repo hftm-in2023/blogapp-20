@@ -22,6 +22,7 @@ export class App {
 
   isAuthenticated = this.#authStore.isAuthenticated;
   userData = this.#authStore.userData;
+  roles = this.#authStore.roles;
 
   login() {
     this.#authStore.login();
