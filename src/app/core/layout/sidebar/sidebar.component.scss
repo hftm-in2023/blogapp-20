@@ -1,0 +1,50 @@
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 12.5rem;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.header-toolbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1rem;
+  position: fixed;
+  z-index: 1000;
+
+  .blog-app-title {
+    cursor: pointer;
+  }
+}
+
+#profileImage {
+  width: 2.1875rem;
+  height: 2.1875rem;
+  border-radius: 1.25rem;
+  background: #0c2354;
+  font-size: 0.9rem;
+  color: #fff;
+  text-align: center;
+  line-height: 2.1875rem;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.add-blog {
+  margin-right: 1rem;
+}
+
+.spacer {
+  flex: 1;
+}

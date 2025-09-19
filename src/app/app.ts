@@ -2,12 +2,12 @@ import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MatProgressBar } from '@angular/material/progress-bar';
 import { RouterStore } from './core/state/router';
-import { HeaderComponent } from './core/layout/header';
 import { AuthStore } from './core/auth';
+import { SidebarComponent } from './core/layout/sidebar/sidebar.component';
 
 @Component({
   selector: 'App',
-  imports: [RouterOutlet, HeaderComponent, MatProgressBar],
+  imports: [RouterOutlet, MatProgressBar, SidebarComponent],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
