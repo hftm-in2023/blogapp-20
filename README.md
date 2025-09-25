@@ -91,7 +91,7 @@ classDiagram
     class BlogOverviewPage {
         <<Component>>
         +model: InputSignal~Model~
-        +likeBlog(event: {id: number, likedByMe: boolean}): void
+        +likeBlog(event): void
     }
 
     class BlogDetailPage {
