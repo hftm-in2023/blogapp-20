@@ -30,14 +30,15 @@ export class BlogStore {
       await this.#blogService.addBlog(blog);
       this.#router.navigate(['/overview']);
     } catch (error) {
-      this.#dispatcher.dispatch({
-        type: 'SET_LOADING_STATE',
-        payload: { isLoading: false },
-      });
       this.#state.update((state) => ({
         ...state,
         error: (error as Error).message,
       }));
+    } finally {
+      this.#dispatcher.dispatch({
+        type: 'SET_LOADING_STATE',
+        payload: { isLoading: false },
+      });
     }
   }
 }

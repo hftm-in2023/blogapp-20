@@ -1,7 +1,7 @@
 :host {
   .blog-card {
     margin: 0.625rem;
-    width: 400px;
+    width: calc(100vw - 1.25rem);
 
     .card-title {
       min-height: 4rem;
@@ -22,6 +22,12 @@
           margin-top: 0;
         }
       }
+    }
+  }
+
+  @media screen and (min-width: 450px) {
+    .blog-card {
+      width: 400px;
     }
   }
 }

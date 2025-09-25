@@ -1,0 +1,96 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    fixedInViewport
+    [attr.role]="'dialog'"
+    [mode]="'over'"
+    [opened]="false"
+  >
+    <mat-toolbar>Menu</mat-toolbar>
+    <mat-nav-list>
+      @if (canAddBlog()) {
+        <a mat-list-item [routerLink]="['/add-blog/']">Neuen Blog erstellen</a>
+      }
+      @switch (isAuthenticated()) {
+        @case (false) {
+          <a
+            mat-list-item
+            tabindex="0"
+            (click)="login.emit()"
+            (keydown)="login.emit()"
+            >Login</a
+          >
+        }
+        @case (true) {
+          <a
+            mat-list-item
+            tabindex="1"
+            (click)="logout.emit()"
+            (keydown)="logout.emit()"
+            >Log out</a
+          >
+        }
+      }
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary" class="header-toolbar">
+      @if (isHandset()) {
+        <button
+          type="button"
+          aria-label="Toggle sidenav"
+          matIconButton
+          (click)="drawer.toggle()"
+        >
+          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+      }
+      <span class="blog-app-title" [routerLink]="['/overview/']">Blog App</span>
+      <span class="spacer"></span>
+
+      @if (isHandset() === false) {
+        @if (canAddBlog()) {
+          <button
+            class="add-blog"
+            mat-flat-button
+            color="accent"
+            routerLink="/add-blog"
+          >
+            Neuen Blog erstellen
+          </button>
+        }
+      }
+
+      @if (isAuthenticated()) {
+        <div
+          id="profileImage"
+          matTooltip="{{ userData()?.preferred_username }}"
+          [innerHTML]="initials()"
+        ></div>
+        <button
+          data-testid="logout-button"
+          mat-icon-button
+          matTooltip="Logout"
+          class="example-icon favorite-icon"
+          aria-label="Logout button"
+          (click)="logout.emit()"
+        >
+          <mat-icon>logout</mat-icon>
+        </button>
+      } @else {
+        <button
+          data-testid="login-button"
+          mat-icon-button
+          matTooltip="Login"
+          class="example-icon favorite-icon"
+          aria-label="Login button"
+          (click)="login.emit()"
+        >
+          <mat-icon>login</mat-icon>
+        </button>
+      }
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
