@@ -30,7 +30,6 @@ export type Blog = {
 })
 export class BlogCard {
   readonly model = input.required<Blog>();
-  readonly index = input.required<number>();
   readonly routeCommands = input.required<[string, number]>();
 
   likeBlog = output<{
