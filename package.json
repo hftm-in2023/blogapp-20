@@ -33,7 +33,7 @@
     "@angular/platform-browser": "^20.3.3",
     "@angular/router": "^20.3.3",
     "@commitlint/cli": "^19.8.1",
-    "@commitlint/config-conventional": "^19.8.1",
+    "@commitlint/config-conventional": "^20.0.0",
     "@ngx-translate/core": "^17.0.0",
     "@ngx-translate/http-loader": "^17.0.0",
     "angular-auth-oidc-client": "20.0.0",
