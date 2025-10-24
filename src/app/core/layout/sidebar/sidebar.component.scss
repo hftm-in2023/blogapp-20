@@ -48,3 +48,14 @@
 .spacer {
   flex: 1;
 }
+
+.language-selector {
+  margin-left: 3px;
+  margin-right: 3px;
+  cursor: pointer;
+  width: 60px;
+
+  &:nth-last-of-type(1) {
+    margin-right: 50px;
+  }
+}

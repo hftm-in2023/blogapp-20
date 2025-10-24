@@ -1,0 +1,10 @@
+{
+  "SIDEBAR": {
+    "CREATE_NEW_BLOG_BUTTON": "Create a new blog post!",
+    "LOGGEDIN_USER": "You are logged in as {{ value }}",
+    "SEARCH_PLACEHOLDER": "Search"
+  },
+  "ADD_BLOG_PAGE": {
+    "NAVIGATION_BACK_TITLE": "Back to overview"
+  }
+}

@@ -17,6 +17,9 @@ import { map, shareReplay } from 'rxjs/operators';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { MatProgressBar } from '@angular/material/progress-bar';
+import { RouterStore } from '../../state/router';
 
 @Component({
   selector: 'Sidebar',
@@ -31,11 +34,15 @@ import { toSignal } from '@angular/core/rxjs-interop';
     RouterOutlet,
     RouterLink,
     MatTooltipModule,
+    TranslatePipe,
+    MatProgressBar,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SidebarComponent {
-  private breakpointObserver = inject(BreakpointObserver);
+  readonly #breakpointObserver = inject(BreakpointObserver);
+  readonly #translate = inject(TranslateService);
+  protected readonly isLoading = inject(RouterStore).isLoading;
 
   isAuthenticated = input.required<boolean>();
   roles = input.required<string[] | null>();
@@ -60,10 +67,14 @@ export class SidebarComponent {
   });
 
   isHandset = toSignal(
-    this.breakpointObserver.observe(Breakpoints.Handset).pipe(
+    this.#breakpointObserver.observe(Breakpoints.Handset).pipe(
       map((result) => result.matches),
       shareReplay(),
     ),
     { initialValue: false },
   ) as Signal<boolean>;
+
+  changeLanguage(language: string) {
+    this.#translate.use(language);
+  }
 }

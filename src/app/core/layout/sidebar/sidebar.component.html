@@ -10,7 +10,9 @@
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
       @if (canAddBlog()) {
-        <a mat-list-item [routerLink]="['/add-blog/']">Neuen Blog erstellen</a>
+        <a mat-list-item [routerLink]="['/add-blog/']">{{
+          "SIDEBAR.CREATE_NEW_BLOG_BUTTON" | translate
+        }}</a>
       }
       @switch (isAuthenticated()) {
         @case (false) {
@@ -32,6 +34,20 @@
           >
         }
       }
+      <a
+        mat-list-item
+        tabindex="0"
+        (click)="changeLanguage('de')"
+        (keydown)="changeLanguage('de')"
+        >Deutsch</a
+      >
+      <a
+        mat-list-item
+        tabindex="0"
+        (click)="changeLanguage('en')"
+        (keydown)="changeLanguage('en')"
+        >English</a
+      >
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -57,15 +73,38 @@
             color="accent"
             routerLink="/add-blog"
           >
-            Neuen Blog erstellen
+            {{ "SIDEBAR.CREATE_NEW_BLOG_BUTTON" | translate }}
           </button>
         }
+      }
+
+      @if (isHandset() === false) {
+        <a
+          class="language-selector"
+          mat-list-item
+          tabindex="0"
+          (click)="changeLanguage('de')"
+          (keydown)="changeLanguage('de')"
+          >DE</a
+        >
+        <span>|</span>
+        <a
+          class="language-selector"
+          mat-list-item
+          tabindex="0"
+          (click)="changeLanguage('en')"
+          (keydown)="changeLanguage('en')"
+          >EN</a
+        >
       }
 
       @if (isAuthenticated()) {
         <div
           id="profileImage"
-          matTooltip="{{ userData()?.preferred_username }}"
+          matTooltip="{{
+            'SIDEBAR.LOGGEDIN_USER'
+              | translate: { value: userData()?.preferred_username }
+          }}"
           [innerHTML]="initials()"
         ></div>
         <button
@@ -91,6 +130,9 @@
         </button>
       }
     </mat-toolbar>
+    @if (isLoading()) {
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    }
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
