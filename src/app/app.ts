@@ -1,18 +1,14 @@
 import { Component, inject } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { MatProgressBar } from '@angular/material/progress-bar';
-import { RouterStore } from './core/state/router';
 import { AuthStore } from './core/auth';
 import { SidebarComponent } from './core/layout/sidebar/sidebar.component';
 
 @Component({
   selector: 'App',
-  imports: [RouterOutlet, MatProgressBar, SidebarComponent],
+  imports: [SidebarComponent],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
 export class App {
-  isLoading = inject(RouterStore).isLoading;
   readonly #authStore = inject(AuthStore);
 
   onModeChange($event: string) {
