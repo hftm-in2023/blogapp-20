@@ -1,11 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MockComponent, MockProvider, ngMocks } from 'ng-mocks';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 import BlogOverviewPage from './blog-overview-page';
 import { BlogBackend } from '../../core/blog/blog-backend';
 import { Blog, BlogCard } from '../../shared/blog-card/blog-card';
+import { MockComponent, MockProvider } from '../../core/mock';
+import { By } from '@angular/platform-browser';
 
 describe('BlogOverviewPage', () => {
   let component: BlogOverviewPage;
@@ -43,7 +44,9 @@ describe('BlogOverviewPage', () => {
     });
     fixture.detectChanges();
     const likeBlogSpy = spyOn(component, 'likeBlog');
-    const blogOverviewComponent = ngMocks.find('BlogCard');
+    const blogOverviewComponent = fixture.debugElement.query(
+      By.css('BlogCard'),
+    );
     // act
     blogOverviewComponent.triggerEventHandler('likeBlog', {
       id: 1,
@@ -63,7 +66,9 @@ describe('BlogOverviewPage', () => {
     });
     fixture.detectChanges();
     // arrange -- act
-    const blogOverviewComponents = ngMocks.findAll('BlogCard');
+    const blogOverviewComponents = fixture.debugElement.queryAll(
+      By.css('BlogCard'),
+    );
     // assert
     expect(blogOverviewComponents.length).toBe(2);
   });
