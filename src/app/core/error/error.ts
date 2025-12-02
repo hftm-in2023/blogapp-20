@@ -5,4 +5,4 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   template: `<h1>Oops! Something went wrong.</h1>`,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Error {}
+export default class Error {}
