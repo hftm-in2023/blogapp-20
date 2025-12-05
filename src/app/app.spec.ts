@@ -3,7 +3,7 @@ import { App } from './app';
 import { AuthStore } from './core/auth';
 import { provideRouter } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { MockProvider } from './core/mock';
+import { MockProvider } from './core/mock.spec';
 
 describe('App', () => {
   beforeEach(async () => {

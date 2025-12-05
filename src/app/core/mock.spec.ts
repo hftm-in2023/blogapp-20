@@ -6,7 +6,6 @@ import {
   Type,
   Provider,
 } from '@angular/core';
-/// <reference types="jasmine" />
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 declare const jasmine: any;
@@ -21,14 +20,12 @@ declare const jasmine: any;
  */
 export function MockComponent<T>(original: Type<T>): Type<unknown> {
   const def = getComponentDef(original);
+  if (!def) throw new Error(`No Angular component definition found.`);
 
-  if (!def) throw new Error('No Angular component definition found.');
-
-  const selector = (
+  const selector =
     typeof def.selectors?.[0]?.[0] === 'string'
-      ? def.selectors[0][0]
-      : 'mock-component'
-  ) as string;
+      ? (def.selectors[0][0] as string)
+      : 'mock-component';
 
   const inputNames = Object.keys(def.inputs ?? {});
   const outputNames = Object.keys(def.outputs ?? {});
@@ -42,17 +39,31 @@ export function MockComponent<T>(original: Type<T>): Type<unknown> {
     [key: string]: unknown;
 
     constructor() {
-      // Outputs: always create an EventEmitter
+      // ---------------------------
+      // Outputs
+      // ---------------------------
       for (const output of outputNames) {
+        // ALWAYS EventEmitter
         (this as Record<string, unknown>)[output] = new EventEmitter<unknown>();
       }
 
-      // Inputs: create a signal() input with .set()
+      // ---------------------------
+      // Inputs
+      // ---------------------------
       for (const input of inputNames) {
-        const s = signal<unknown>(undefined);
-        (this as Record<string, unknown>)[input] = Object.assign(s, {
-          set: (v: unknown) => s.set(v),
+        // Input-Signale werden mit `signal()` simuliert
+        const sig = signal<unknown>(undefined);
+
+        // allow: mock.input = 'x' OR mock.input.set('x')
+        Object.defineProperty(this, input, {
+          get: () => sig(),
+          set: (v) => sig.set(v),
+          configurable: true,
+          enumerable: true,
         });
+
+        // Direct access (test convenience)
+        (this as Record<string, unknown>)[input] = sig;
       }
     }
   }

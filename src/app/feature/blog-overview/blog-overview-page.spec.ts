@@ -5,7 +5,7 @@ import { of } from 'rxjs';
 import BlogOverviewPage from './blog-overview-page';
 import { BlogBackend } from '../../core/blog/blog-backend';
 import { Blog, BlogCard } from '../../shared/blog-card/blog-card';
-import { MockComponent, MockProvider } from '../../core/mock';
+import { MockComponent, MockProvider } from '../../core/mock.spec';
 import { By } from '@angular/platform-browser';
 
 describe('BlogOverviewPage', () => {
