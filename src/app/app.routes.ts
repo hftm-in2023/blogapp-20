@@ -1,6 +1,15 @@
-import { Routes } from '@angular/router';
+import { ResolveFn, Routes } from '@angular/router';
 import { ERROR_ROUTES } from './core/error';
 import { STATIC_ROUTES } from './core/static';
+import { inject } from '@angular/core';
+import { lastValueFrom } from 'rxjs';
+import { BlogBackend, Entries } from './core/blog/blog-backend';
+import authGuard from './core/auth/guard';
+
+export const entriesResolver: ResolveFn<Entries> = async () => {
+  const blogBackendService = inject(BlogBackend);
+  return await lastValueFrom(blogBackendService.getBlogPosts());
+};
 
 export const APP_ROUTES: Routes = [
   {
@@ -15,7 +24,7 @@ export const APP_ROUTES: Routes = [
   {
     path: 'overview',
     loadComponent: () => import('./feature/blog-overview/blog-overview-page'),
-    resolve: { model: () => import('./core/blog/resolver') },
+    resolve: { model: entriesResolver },
     runGuardsAndResolvers: 'always',
   },
   {
@@ -25,7 +34,7 @@ export const APP_ROUTES: Routes = [
   {
     path: 'add-blog',
     loadComponent: () => import('./feature/add-blog/add-blog-page'),
-    canActivate: [() => import('./core/auth/guard')],
+    canActivate: [authGuard],
   },
   ...ERROR_ROUTES,
   ...STATIC_ROUTES,
