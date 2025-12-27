@@ -5,15 +5,15 @@ import { of } from 'rxjs';
 import BlogOverviewPage from './blog-overview-page';
 import { BlogBackend } from '../../core/blog/blog-backend';
 import { Blog, BlogCard } from '../../shared/blog-card/blog-card';
-import { MockComponent, MockProvider } from '../../core/mock.spec';
+import { MockProvider } from '../../core/mock.spec';
 import { By } from '@angular/platform-browser';
 
 describe('BlogOverviewPage', () => {
   let component: BlogOverviewPage;
   let fixture: ComponentFixture<BlogOverviewPage>;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       providers: [
         {
           provide: ActivatedRoute,
@@ -23,8 +23,13 @@ describe('BlogOverviewPage', () => {
         },
         MockProvider(BlogBackend),
       ],
-      imports: [BlogOverviewPage, MockComponent(BlogCard)],
-    });
+      imports: [BlogOverviewPage],
+    })
+      .overrideComponent(BlogCard, {
+        set: { template: '<div>Mocked Component</div>' },
+      })
+      .compileComponents();
+
     fixture = TestBed.createComponent(BlogOverviewPage);
     component = fixture.componentInstance;
   });
