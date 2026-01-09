@@ -3,10 +3,10 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 import BlogOverviewPage from './blog-overview-page';
-import { BlogBackend } from '../../core/blog/blog-backend';
 import { Blog, BlogCard } from '../../shared/blog-card/blog-card';
 import { MockProvider } from '../../core/mock.spec';
 import { By } from '@angular/platform-browser';
+import { BlogBackend } from './blog-backend';
 
 describe('BlogOverviewPage', () => {
   let component: BlogOverviewPage;
