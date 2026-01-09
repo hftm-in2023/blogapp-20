@@ -20,6 +20,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { MatProgressBar } from '@angular/material/progress-bar';
 import { RouterStore } from '../../state/router';
+import { ThemeStore } from '../../theme/theme.store';
 
 @Component({
   selector: 'Sidebar',
@@ -43,6 +44,7 @@ export class SidebarComponent {
   readonly #breakpointObserver = inject(BreakpointObserver);
   readonly #translate = inject(TranslateService);
   protected readonly isLoading = inject(RouterStore).isLoading;
+  protected readonly themeStore = inject(ThemeStore);
 
   isAuthenticated = input.required<boolean>();
   roles = input.required<string[] | null>();
@@ -76,5 +78,9 @@ export class SidebarComponent {
 
   changeLanguage(language: string) {
     this.#translate.use(language);
+  }
+
+  toggleTheme() {
+    this.themeStore.toggleTheme();
   }
 }

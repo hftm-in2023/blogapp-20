@@ -1,0 +1,42 @@
+@use "@angular/material" as mat;
+
+// Include the common styles for Angular Material
+@include mat.core();
+
+// Create the light theme using Material 3
+$light-theme: mat.define-theme(
+  (
+    color: (
+      theme-type: light,
+      primary: mat.$azure-palette,
+      tertiary: mat.$blue-palette,
+    ),
+  )
+);
+
+// Create the dark theme using Material 3
+$dark-theme: mat.define-theme(
+  (
+    color: (
+      theme-type: dark,
+      primary: mat.$azure-palette,
+      tertiary: mat.$blue-palette,
+    ),
+  )
+);
+
+// Apply the light theme by default
+html {
+  @include mat.all-component-themes($light-theme);
+}
+
+// Apply the dark theme when the 'dark-theme' class is present
+html.dark-theme {
+  @include mat.all-component-colors($dark-theme);
+
+  // Custom dark mode styles
+  body {
+    background-color: #121212;
+    color: rgba(255, 255, 255, 0.87);
+  }
+}

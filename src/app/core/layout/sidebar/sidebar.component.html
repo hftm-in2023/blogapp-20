@@ -48,6 +48,18 @@
         (keydown)="changeLanguage('en')"
         >English</a
       >
+      <a
+        mat-list-item
+        tabindex="0"
+        (click)="toggleTheme()"
+        (keydown)="toggleTheme()"
+      >
+        @if (themeStore.isDarkMode()) {
+          <mat-icon>light_mode</mat-icon> Light Mode
+        } @else {
+          <mat-icon>dark_mode</mat-icon> Dark Mode
+        }
+      </a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -97,6 +109,19 @@
           >EN</a
         >
       }
+
+      <button
+        mat-icon-button
+        matTooltip="Toggle theme"
+        aria-label="Toggle theme button"
+        (click)="toggleTheme()"
+      >
+        @if (themeStore.isDarkMode()) {
+          <mat-icon>light_mode</mat-icon>
+        } @else {
+          <mat-icon>dark_mode</mat-icon>
+        }
+      </button>
 
       @if (isAuthenticated()) {
         <div
