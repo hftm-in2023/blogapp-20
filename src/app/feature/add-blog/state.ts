@@ -1,5 +1,5 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { AddBlogService, CreatedBlog } from './add-blog';
+import { AddBlogBackend, CreatedBlog } from './add-blog-backend';
 import { Router } from '@angular/router';
 import { Dispatcher } from '../../core/events/dispatcher';
 
@@ -12,7 +12,7 @@ type BlogState = {
 })
 export class BlogStore {
   readonly #state = signal<BlogState>({ error: undefined });
-  readonly #blogService = inject(AddBlogService);
+  readonly #blogService = inject(AddBlogBackend);
   readonly #router = inject(Router);
   readonly #dispatcher = inject(Dispatcher);
 

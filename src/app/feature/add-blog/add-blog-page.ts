@@ -18,7 +18,7 @@ import {
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { CreatedBlog } from './add-blog';
+import { CreatedBlog } from './add-blog-backend';
 import { BlogStore } from './state';
 import { Dispatcher } from '../../core/events/dispatcher';
 

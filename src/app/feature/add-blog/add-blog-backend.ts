@@ -14,7 +14,7 @@ export type CreatedBlog = z.infer<typeof CreatedBlogSchema>;
 @Injectable({
   providedIn: 'root',
 })
-export class AddBlogService {
+export class AddBlogBackend {
   readonly #httpClient = inject(HttpClient);
 
   addBlog(blog: CreatedBlog) {
