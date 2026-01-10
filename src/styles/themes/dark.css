@@ -1,0 +1,94 @@
+/**
+ * Dark Theme CSS Variables
+ * Material Design 3 System Color Tokens
+ */
+
+:root.dark-theme,
+:host {
+  /* Surface colors */
+  --sys-background: #1a1c1e;
+  --sys-on-background: #e2e2e6;
+  --sys-surface: #1a1c1e;
+  --sys-surface-dim: #1a1c1e;
+  --sys-surface-bright: #40424a;
+  --sys-surface-container-lowest: #0f1113;
+  --sys-surface-container-low: #1a1c1e;
+  --sys-surface-container: #1e2022;
+  --sys-surface-container-high: #292a2d;
+  --sys-surface-container-highest: #333538;
+  --sys-on-surface: #e2e2e6;
+  --sys-surface-variant: #43474e;
+  --sys-on-surface-variant: #c4c6cf;
+  --sys-inverse-surface: #e2e2e6;
+  --sys-inverse-on-surface: #2f3033;
+
+  /* Outline colors */
+  --sys-outline: #8e9099;
+  --sys-outline-variant: #43474e;
+
+  /* Shadow and scrim */
+  --sys-shadow: #000000;
+  --sys-scrim: #000000;
+  --sys-surface-tint: #a8c8ff;
+
+  /* Primary colors */
+  --sys-primary: #a8c8ff;
+  --sys-on-primary: #00315c;
+  --sys-primary-container: #004a77;
+  --sys-on-primary-container: #d3e4fd;
+  --sys-inverse-primary: #1976d2;
+
+  /* Secondary colors */
+  --sys-secondary: #bcc7dc;
+  --sys-on-secondary: #273141;
+  --sys-secondary-container: #3d4758;
+  --sys-on-secondary-container: #d8e3f8;
+
+  /* Tertiary colors */
+  --sys-tertiary: #d9bde4;
+  --sys-on-tertiary: #3d2946;
+  --sys-tertiary-container: #543e5e;
+  --sys-on-tertiary-container: #f5d9ff;
+
+  /* Error colors */
+  --sys-error: #ffb4ab;
+  --sys-on-error: #690005;
+  --sys-error-container: #93000a;
+  --sys-on-error-container: #ffdad6;
+
+  /* Neutral colors */
+  --sys-neutral: #8e9099;
+  --sys-neutral-variant: #74777f;
+
+  /* Fixed colors */
+  --sys-primary-fixed: #d3e4fd;
+  --sys-primary-fixed-dim: #a8c8ff;
+  --sys-on-primary-fixed: #001c38;
+  --sys-on-primary-fixed-variant: #004a77;
+
+  --sys-secondary-fixed: #d8e3f8;
+  --sys-secondary-fixed-dim: #bcc7dc;
+  --sys-on-secondary-fixed: #11202c;
+  --sys-on-secondary-fixed-variant: #3d4758;
+
+  --sys-tertiary-fixed: #f5d9ff;
+  --sys-tertiary-fixed-dim: #d9bde4;
+  --sys-on-tertiary-fixed: #271430;
+  --sys-on-tertiary-fixed-variant: #543e5e;
+
+  /* Inverse colors */
+  --sys-inverse-secondary: #545f71;
+  --sys-inverse-tertiary: #6d5677;
+  --sys-inverse-error: #ba1a1a;
+
+  /* Error fixed */
+  --sys-error-fixed: #ffdad6;
+  --sys-error-fixed-dim: #ffb4ab;
+  --sys-on-error-fixed: #410002;
+  --sys-on-error-fixed-variant: #93000a;
+}
+
+body {
+  background-color: var(--sys-background);
+  color: var(--sys-on-background);
+}
