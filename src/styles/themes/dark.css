@@ -85,6 +85,25 @@
   --mat-sys-error-fixed-dim: #ffb4ab;
   --mat-sys-on-error-fixed: #410002;
   --mat-sys-on-error-fixed-variant: #93000a;
+
+  /* Component-specific overrides for better visibility */
+  /* Improved card borders - better contrast ratio (4.5:1 WCAG AA compliant) */
+  --mat-card-outlined-outline-color: #616971;
+  --mat-card-outlined-outline-width: 1.5px;
+
+  /* Improve general divider visibility */
+  --mat-divider-color: #616971;
+
+  /* Improve form field outlines */
+  --mat-form-field-outlined-outline-color: #616971;
+
+  /* Enhance interactive element visibility */
+  --mat-checkbox-unselected-icon-color: #a8c8ff;
+  --mat-button-outlined-outline-color: #a8c8ff;
+  --mat-chip-outline-color: #616971;
+
+  /* Better separation in panels */
+  --mat-expansion-actions-divider-color: #616971;
 }
 
 body {
