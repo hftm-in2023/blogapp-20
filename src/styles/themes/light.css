@@ -3,8 +3,7 @@
  * Material Design 3 System Color Tokens
  */
 
-:root,
-:host {
+:root {
   /* Surface colors */
   --sys-background: #fdfbff;
   --sys-on-background: #1a1c1e;
