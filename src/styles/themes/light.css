@@ -1,0 +1,93 @@
+/**
+ * Light Theme CSS Variables
+ * Material Design 3 System Color Tokens
+ */
+
+:root {
+  /* Surface colors */
+  --mat-sys-background: #fdfbff;
+  --mat-sys-on-background: #1a1c1e;
+  --mat-sys-surface: #fdfbff;
+  --mat-sys-surface-dim: #dde3ea;
+  --mat-sys-surface-bright: #fdfbff;
+  --mat-sys-surface-container-lowest: #ffffff;
+  --mat-sys-surface-container-low: #f7f9ff;
+  --mat-sys-surface-container: #ebeef5;
+  --mat-sys-surface-container-high: #e6e8ef;
+  --mat-sys-surface-container-highest: #e0e3ea;
+  --mat-sys-on-surface: #1a1c1e;
+  --mat-sys-surface-variant: #dfe2eb;
+  --mat-sys-on-surface-variant: #43474e;
+  --mat-sys-inverse-surface: #2f3033;
+  --mat-sys-inverse-on-surface: #f1f0f4;
+
+  /* Outline colors */
+  --mat-sys-outline: #74777f;
+  --mat-sys-outline-variant: #c4c6cf;
+
+  /* Shadow and scrim */
+  --mat-sys-shadow: #000000;
+  --mat-sys-scrim: #000000;
+  --mat-sys-surface-tint: #1976d2;
+
+  /* Primary colors */
+  --mat-sys-primary: #1976d2;
+  --mat-sys-on-primary: #ffffff;
+  --mat-sys-primary-container: #d3e4fd;
+  --mat-sys-on-primary-container: #001c38;
+  --mat-sys-inverse-primary: #a8c8ff;
+
+  /* Secondary colors */
+  --mat-sys-secondary: #545f71;
+  --mat-sys-on-secondary: #ffffff;
+  --mat-sys-secondary-container: #d8e3f8;
+  --mat-sys-on-secondary-container: #11202c;
+
+  /* Tertiary colors */
+  --mat-sys-tertiary: #6d5677;
+  --mat-sys-on-tertiary: #ffffff;
+  --mat-sys-tertiary-container: #f5d9ff;
+  --mat-sys-on-tertiary-container: #271430;
+
+  /* Error colors */
+  --mat-sys-error: #ba1a1a;
+  --mat-sys-on-error: #ffffff;
+  --mat-sys-error-container: #ffdad6;
+  --mat-sys-on-error-container: #410002;
+
+  /* Neutral colors */
+  --mat-sys-neutral: #8e9099;
+  --mat-sys-neutral-variant: #74777f;
+
+  /* Fixed colors */
+  --mat-sys-primary-fixed: #d3e4fd;
+  --mat-sys-primary-fixed-dim: #a8c8ff;
+  --mat-sys-on-primary-fixed: #001c38;
+  --mat-sys-on-primary-fixed-variant: #004a77;
+
+  --mat-sys-secondary-fixed: #d8e3f8;
+  --mat-sys-secondary-fixed-dim: #bcc7dc;
+  --mat-sys-on-secondary-fixed: #11202c;
+  --mat-sys-on-secondary-fixed-variant: #3d4758;
+
+  --mat-sys-tertiary-fixed: #f5d9ff;
+  --mat-sys-tertiary-fixed-dim: #d9bde4;
+  --mat-sys-on-tertiary-fixed: #271430;
+  --mat-sys-on-tertiary-fixed-variant: #543e5e;
+
+  /* Inverse colors */
+  --mat-sys-inverse-secondary: #bcc7dc;
+  --mat-sys-inverse-tertiary: #d9bde4;
+  --mat-sys-inverse-error: #ffb4ab;
+
+  /* Error fixed */
+  --mat-sys-error-fixed: #ffdad6;
+  --mat-sys-error-fixed-dim: #ffb4ab;
+  --mat-sys-on-error-fixed: #410002;
+  --mat-sys-on-error-fixed-variant: #93000a;
+}
+
+body {
+  background-color: var(--mat-sys-background);
+  color: var(--mat-sys-on-background);
+}
