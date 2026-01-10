@@ -17,9 +17,17 @@ export class ThemeStore {
   constructor() {
     storeLogger.attachState(this.themeMode, { name: 'ThemeStore' });
 
+    // Apply initial theme immediately
+    this.#applyTheme(this.#themeMode());
+
     // Apply theme to document and persist changes
     effect(() => {
       const mode = this.themeMode();
+      console.log('Theme effect triggered, mode:', mode);
+      console.log(
+        'Applying theme class:',
+        mode === 'dark' ? 'adding dark-theme' : 'removing dark-theme',
+      );
       this.#applyTheme(mode);
       this.#persistTheme(mode);
     });
@@ -56,11 +64,22 @@ export class ThemeStore {
 
   #applyTheme(mode: ThemeMode): void {
     const htmlElement = document.documentElement;
+    console.log('Before apply - classList:', htmlElement.classList.toString());
+    console.log('Mode to apply:', mode);
+
     if (mode === 'dark') {
       htmlElement.classList.add('dark-theme');
+      console.log('Added dark-theme class');
     } else {
       htmlElement.classList.remove('dark-theme');
+      console.log('Removed dark-theme class');
     }
+
+    console.log('After apply - classList:', htmlElement.classList.toString());
+    console.log(
+      'Computed style background:',
+      getComputedStyle(document.body).backgroundColor,
+    );
   }
 
   #persistTheme(mode: ThemeMode): void {
