@@ -16,17 +16,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20.19.1
-          cache: 'npm'
-          cache-dependency-path: package-lock.json
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
 
       - name: Install dependencies and build Angular app
         run: |
-          npm ci
-          npm run build -- --base-href /blogapp-20/
+          bun install --frozen-lockfile
+          bun run build -- --base-href /blogapp-20/
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@6c2d9db40f9296374acc17b90404b6e8864128c8 # v4
