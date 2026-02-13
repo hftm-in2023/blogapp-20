@@ -1,0 +1,1 @@
+import{Db as a,Eb as i,Yb as c,fb as o}from"./chunk-F2J2YHPF.js";var t=class n{static \u0275fac=function(e){return new(e||n)};static \u0275cmp=o({type:n,selectors:[["PageNotFound"]],decls:2,vars:0,template:function(e,d){e&1&&(a(0,"h1"),c(1,"Diese Seite konnte leider nicht gefunden werden."),i())},encapsulation:2,changeDetection:0})};export{t as default};
