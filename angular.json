@@ -29,6 +29,9 @@
               "src/silent-renew.html"
             ],
             "styles": [
+              "src/theme.scss",
+              "src/styles/themes/light.css",
+              "src/styles/themes/dark.css",
               "src/styles.scss"
             ]
           },
@@ -104,6 +107,9 @@
               }
             ],
             "styles": [
+              "src/theme.scss",
+              "src/styles/themes/light.css",
+              "src/styles/themes/dark.css",
               "src/styles.scss"
             ]
           }
