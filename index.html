@@ -6,10 +6,21 @@
     <base href="/blogapp-20/"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="icon" type="image/x-icon" href="favicon.ico"/>
+    <script>
+      (function () {
+        var t = localStorage.getItem("blog-app-theme");
+        if (
+          t === "dark" ||
+          (!t && window.matchMedia("(prefers-color-scheme: dark)").matches)
+        ) {
+          document.documentElement.classList.add("dark-mode");
+        }
+      })();
+    </script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&amp;display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
-  <link rel="stylesheet" href="styles-Z5UYKNDX.css"></head>
+  <link rel="stylesheet" href="styles-SLAU2NM7.css"></head>
   <body class="mat-typography">
     <app></app>
-  <link rel="modulepreload" href="chunk-KCXLZBML.js"><link rel="modulepreload" href="chunk-KHKLH72U.js"><link rel="modulepreload" href="chunk-QZVLGYMP.js"><link rel="modulepreload" href="chunk-XYG5K5RR.js"><link rel="modulepreload" href="chunk-NJFCSGQV.js"><link rel="modulepreload" href="chunk-EJ7VFJNE.js"><link rel="modulepreload" href="chunk-5CNXTSMD.js"><link rel="modulepreload" href="chunk-Z2CYHMII.js"><link rel="modulepreload" href="chunk-F2J2YHPF.js"><script src="main-7CAYO76I.js" type="module"></script></body>
+  <link rel="modulepreload" href="chunk-KCXLZBML.js"><link rel="modulepreload" href="chunk-KHKLH72U.js"><link rel="modulepreload" href="chunk-QZVLGYMP.js"><link rel="modulepreload" href="chunk-XYG5K5RR.js"><link rel="modulepreload" href="chunk-NJFCSGQV.js"><link rel="modulepreload" href="chunk-EJ7VFJNE.js"><link rel="modulepreload" href="chunk-5CNXTSMD.js"><link rel="modulepreload" href="chunk-Z2CYHMII.js"><link rel="modulepreload" href="chunk-F2J2YHPF.js"><script src="main-FBT5BJCZ.js" type="module"></script></body>
 </html>
