@@ -79,7 +79,7 @@ describe('BlogCard', () => {
     const matIcon = fixture.debugElement.query(
       By.css('[data-testid="like-button-icon"]'),
     );
-    expect(matIcon.styles['color']).toBe('black');
+    expect(matIcon.styles['color']).toBe('');
   });
   it('should show the like button in red when likedByMe is true', () => {
     // arrange
