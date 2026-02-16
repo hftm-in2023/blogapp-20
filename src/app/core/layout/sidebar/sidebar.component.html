@@ -48,6 +48,13 @@
         (keydown)="changeLanguage('en')"
         >English</a
       >
+      <a
+        mat-list-item
+        tabindex="0"
+        (click)="toggleTheme()"
+        (keydown)="toggleTheme()"
+        >{{ isDarkMode() ? "Light Mode" : "Dark Mode" }}</a
+      >
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -96,6 +103,17 @@
           (keydown)="changeLanguage('en')"
           >EN</a
         >
+      }
+
+      @if (isHandset() === false) {
+        <button
+          mat-icon-button
+          matTooltip="Toggle theme"
+          aria-label="Toggle light/dark theme"
+          (click)="toggleTheme()"
+        >
+          <mat-icon>{{ isDarkMode() ? "light_mode" : "dark_mode" }}</mat-icon>
+        </button>
       }
 
       @if (isAuthenticated()) {

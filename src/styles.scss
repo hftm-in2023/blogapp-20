@@ -1,10 +1,42 @@
-/* You can add global styles to this file, and also import other style files */
-@import "@angular/material/prebuilt-themes/azure-blue.css";
+@use "@angular/material" as mat;
+
+// ── Light theme (azure primary) ──
+$light-theme: mat.define-theme(
+  (
+    color: (
+      theme-type: light,
+      primary: mat.$azure-palette,
+      tertiary: mat.$blue-palette,
+    ),
+  )
+);
+
+// ── Dark theme (blue primary) ──
+$dark-theme: mat.define-theme(
+  (
+    color: (
+      theme-type: dark,
+      primary: mat.$blue-palette,
+      tertiary: mat.$azure-palette,
+    ),
+  )
+);
+
+// ── Apply light theme as default on <html> ──
+html {
+  @include mat.all-component-themes($light-theme);
+}
+
+// ── Apply dark theme color overrides on .dark-mode ──
+.dark-mode {
+  @include mat.all-component-colors($dark-theme);
+}
 
 html,
 body {
   height: 100%;
 }
+
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
