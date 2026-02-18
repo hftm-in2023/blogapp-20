@@ -1,1 +1,0 @@
-import{_ as n,i as e}from"./chunk-XBMBXTK4.js";var a=class o{#o=new e;action$=this.#o.asObservable();dispatch(t){console.log("Dispatched action:",t),this.#o.next(t)}static \u0275fac=function(i){return new(i||o)};static \u0275prov=n({token:o,factory:o.\u0275fac,providedIn:"root"})};export{a};
