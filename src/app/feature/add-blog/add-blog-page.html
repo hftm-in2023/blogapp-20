@@ -1,4 +1,4 @@
-<form [formGroup]="formTyped" (ngSubmit)="onSubmit()">
+<form (submit)="onSubmit($event)">
   <div class="blog-input">
     @if (state().error) {
     <div class="error-message" color="warn">
@@ -15,26 +15,31 @@
     >
       Publish blog
     </button>
-    <button type="reset" mat-raised-button color="secondary">Reset</button>
+    <button
+      type="button"
+      mat-raised-button
+      color="secondary"
+      (click)="onReset()"
+    >
+      Reset
+    </button>
     <mat-form-field appearance="fill">
       <mat-label>Title</mat-label>
-      <input matInput formControlName="title" />
+      <input matInput [formField]="blogForm.title" />
       <mat-error>
-        @if (formTyped.get('title')?.hasError('required')) {
-        <span>Title should not be empty</span>
-        } @else if (formTyped.get('title')?.hasError('pattern')) {
-        <span>Not a valid Title</span>
-        } @else if (formTyped.get('title')?.hasError('custom')) {
-        <span>Custom error: Title cannot be 'Test'</span>
-        } @else if (formTyped.get('title')?.hasError('customAsync')) {
-        <span>Custom async error: Title cannot be 'Test Async'</span>
+        @for (error of blogForm.title().errors(); track error.kind) {
+        <span>{{ error.message }}</span>
         }
       </mat-error>
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Tell your story...</mat-label>
-      <textarea matInput rows="20" formControlName="content"></textarea>
-      <mat-error>Content should not be empty</mat-error>
+      <textarea matInput rows="20" [formField]="blogForm.content"></textarea>
+      <mat-error>
+        @for (error of blogForm.content().errors(); track error.kind) {
+        <span>{{ error.message }}</span>
+        }
+      </mat-error>
     </mat-form-field>
   </div>
 </form>
