@@ -1,20 +1,20 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  DestroyRef,
+  effect,
   inject,
+  resource,
   signal,
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
-  AbstractControl,
-  FormControl,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  ValidationErrors,
-  Validators,
-} from '@angular/forms';
+  form,
+  FormField,
+  required,
+  pattern,
+  validate,
+  validateAsync,
+  submit,
+} from '@angular/forms/signals';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -24,106 +24,102 @@ import { Dispatcher } from '../../core/events/dispatcher';
 
 @Component({
   selector: 'app-add-blog',
-  imports: [
-    FormsModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-  ],
+  imports: [FormField, MatFormFieldModule, MatInputModule, MatButtonModule],
   templateUrl: './add-blog-page.html',
   styleUrl: './add-blog-page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class AddBlogPage {
-  readonly #destroyRef = inject(DestroyRef);
   readonly #blogStateService = inject(BlogStore);
   readonly #dispatcher = inject(Dispatcher);
 
-  // properties used in template
+  // Properties used in template
   protected readonly submitButtonDisabled = signal<boolean>(false);
   protected readonly state = this.#blogStateService.state;
 
-  formTyped = new FormGroup<{
-    title: FormControl<string>;
-    content: FormControl<string>;
-  }>({
-    title: new FormControl<string>('an exiting title', {
-      nonNullable: true,
-      validators: [
-        Validators.required,
-        Validators.pattern('^[A-Z]+(.)*'),
-        this.customVaidator,
-      ],
-      asyncValidators: [this.customAsyncValidator],
-    }),
-    content: new FormControl<string>('', {
-      nonNullable: true,
-      validators: [Validators.required],
-      asyncValidators: [],
-    }),
+  // Form model signal (single source of truth)
+  protected readonly blogModel = signal<{ title: string; content: string }>({
+    title: 'an exiting title',
+    content: '',
+  });
+
+  // Signal form with schema-based validation
+  protected readonly blogForm = form(this.blogModel, (s) => {
+    // Title validators
+    required(s.title, { message: 'Title should not be empty' });
+    pattern(s.title, /^[A-Z]+(.)*/, { message: 'Not a valid Title' });
+
+    validate(s.title, ({ value }) => {
+      if (value() === 'Test') {
+        return {
+          kind: 'custom',
+          message: "Custom error: Title cannot be 'Test'",
+        };
+      }
+      return undefined;
+    });
+
+    validateAsync(s.title, {
+      params: ({ value }) => value(),
+      factory: (params) =>
+        resource({
+          params,
+          loader: async ({ params: titleValue }) => {
+            // Simulate server request with 1-second delay
+            await new Promise((resolve) => setTimeout(resolve, 1000));
+            return titleValue === 'Test Async';
+          },
+        }),
+      onSuccess: (isForbidden) => {
+        if (isForbidden) {
+          return {
+            kind: 'customAsync',
+            message: "Custom async error: Title cannot be 'Test Async'",
+          };
+        }
+        return null;
+      },
+      onError: () => null,
+    });
+
+    // Content validators
+    required(s.content, { message: 'Content should not be empty' });
   });
 
   constructor() {
-    // Auf Wertänderungen reagieren
-    this.formTyped.valueChanges
-      .pipe(takeUntilDestroyed(this.#destroyRef))
-      .subscribe((value) => {
-        console.log('Form value changed:', value);
-        // Hier kannst du auf Änderungen reagieren
+    // React to value changes (replaces formTyped.valueChanges subscription)
+    effect(() => {
+      const value = this.blogModel();
+      console.log('Form value changed:', value);
+    });
+
+    // React to status changes (replaces formTyped.statusChanges subscription)
+    effect(() => {
+      const isPending = this.blogForm().pending();
+      const isValid = this.blogForm().valid();
+      console.log(
+        'Form status changed:',
+        isPending ? 'PENDING' : isValid ? 'VALID' : 'INVALID',
+      );
+      this.#dispatcher.dispatch({
+        type: 'SET_LOADING_STATE',
+        payload: { isLoading: isPending },
       });
-
-    // Auf Status-Änderungen reagieren
-    this.formTyped.statusChanges
-      .pipe(takeUntilDestroyed(this.#destroyRef))
-      .subscribe((status) => {
-        console.log('Form status changed:', status);
-        // Status: VALID, INVALID, PENDING, DISABLED
-        if (status === 'PENDING') {
-          this.#dispatcher.dispatch({
-            type: 'SET_LOADING_STATE',
-            payload: { isLoading: true },
-          });
-        } else {
-          this.#dispatcher.dispatch({
-            type: 'SET_LOADING_STATE',
-            payload: { isLoading: false },
-          });
-        }
-      });
-  }
-
-  customVaidator(control: AbstractControl): ValidationErrors | null {
-    const value = control.value;
-    if (value && value === 'Test') {
-      return { custom: true };
-    }
-    return null;
-  }
-
-  customAsyncValidator(
-    control: AbstractControl,
-  ): Promise<ValidationErrors | null> {
-    return new Promise((resolve) => {
-      // Simuliere Server-Anfrage mit Verzögerung
-      setTimeout(() => {
-        if (control.value === 'Test Async') {
-          resolve({ customAsync: true });
-        } else {
-          resolve(null);
-        }
-      }, 1000); // 1 Sekunde Verzögerung
     });
   }
 
-  onSubmit() {
-    if (this.formTyped.valid) {
+  onSubmit(event: Event) {
+    event.preventDefault();
+    submit(this.blogForm, async () => {
       this.submitButtonDisabled.set(true);
-      const blogData = this.formTyped.value;
+      const blogData = this.blogModel();
       console.log('Blog submitted:', blogData);
-      this.#blogStateService.addBlog(blogData as CreatedBlog);
-    } else {
-      console.log('Form is invalid');
-    }
+      await this.#blogStateService.addBlog(blogData as CreatedBlog);
+    });
+  }
+
+  onReset() {
+    this.blogModel.set({ title: 'an exiting title', content: '' });
+    this.blogForm().reset();
   }
 }
