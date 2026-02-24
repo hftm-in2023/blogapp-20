@@ -1,23 +1,6 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { BlogCard } from '../../shared/blog-card/blog-card';
-
-type Model = {
-  data: {
-    id: number;
-    title: string;
-    contentPreview: string;
-    author: string;
-    likes: number;
-    comments: number;
-    likedByMe: boolean;
-    createdByMe: boolean;
-    headerImageUrl?: string | undefined;
-  }[];
-  pageIndex: number;
-  pageSize: number;
-  totalCount: number;
-  maxPageSize: number;
-};
+import { BlogBackend } from './blog-backend';
 
 @Component({
   selector: 'app-blog-overview-page',
@@ -27,7 +10,8 @@ type Model = {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class BlogOverviewPage {
-  protected readonly model = input.required<Model>({});
+  readonly #backend = inject(BlogBackend);
+  protected readonly entries = this.#backend.entries;
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   likeBlog($event: { id: number; likedByMe: boolean }) {

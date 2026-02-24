@@ -1,6 +1,5 @@
-import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { httpResource } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { z } from 'zod';
 import { environment } from '../../../environments/environment';
 
@@ -34,11 +33,10 @@ export type Entries = z.infer<typeof EntriesSchema>;
   providedIn: 'root',
 })
 export class BlogBackend {
-  readonly #httpClient = inject(HttpClient);
-
-  getBlogPosts(): Observable<Entries> {
-    return this.#httpClient
-      .get<Entries>(`${environment.serviceUrl}/entries`)
-      .pipe(map((entries) => EntriesSchema.parse(entries)));
-  }
+  readonly entries = httpResource<Entries>(
+    () => `${environment.serviceUrl}/entries`,
+    {
+      parse: (data) => EntriesSchema.parse(data),
+    },
+  );
 }

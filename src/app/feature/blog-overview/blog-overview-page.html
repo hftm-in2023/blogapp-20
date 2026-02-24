@@ -1,6 +1,6 @@
-@if (model()) {
+@if (entries.hasValue()) {
 <div class="blog-container">
-  @for (blog of model().data; track blog.id; let i = $index) {
+  @for (blog of entries.value()!.data; track blog.id; let i = $index) {
   <BlogCard
     [model]="blog"
     [routeCommands]="['/detail/', blog.id]"
@@ -8,4 +8,8 @@
   />
   }
 </div>
+} @else if (entries.isLoading()) {
+<p>Loading...</p>
+} @else if (entries.error()) {
+<p>Error loading blog posts.</p>
 }
