@@ -23,7 +23,7 @@
     >
       Reset
     </button>
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="outline">
       <mat-label>Title</mat-label>
       <input matInput [formField]="blogForm.title" />
       <mat-error>
@@ -32,7 +32,7 @@
         }
       </mat-error>
     </mat-form-field>
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="outline">
       <mat-label>Tell your story...</mat-label>
       <textarea matInput rows="20" [formField]="blogForm.content"></textarea>
       <mat-error>

@@ -1,14 +1,15 @@
 :host {
+  display: block;
+
   .error-message {
-    padding: 1rem;
-    margin: 1rem 0;
+    padding: 1rem 1.25rem;
+    margin: 0 0 1.5rem;
     color: var(--mat-sys-error);
     background-color: var(--mat-sys-error-container);
-    border-radius: 0.5rem;
-  }
-
-  .mat-icon {
-    padding-right: 0.3125rem;
+    border-radius: 0.75rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    order: -1;
   }
 
   .blog-input {
@@ -17,31 +18,48 @@
     margin-left: auto;
     margin-right: auto;
     padding-top: 5rem;
-    padding-bottom: 2rem;
-    width: 90%;
-    max-width: 48rem;
+    padding-bottom: 3rem;
+    width: 92%;
+    max-width: 44rem;
 
     mat-form-field.mat-mdc-form-field {
-      margin-top: 0.625rem;
       width: 100%;
+    }
+
+    // Title field — larger, bolder input
+    mat-form-field:first-of-type {
+      order: 0;
+      margin-bottom: 0.5rem;
+
+      input {
+        font-family: "Inter", "Roboto", sans-serif;
+        font-size: 1.5rem;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+      }
+    }
+
+    // Content field — comfortable writing size
+    mat-form-field:last-of-type {
+      order: 1;
+
+      textarea {
+        font-size: 1.0625rem;
+        line-height: 1.75;
+      }
     }
   }
 
   .submit-button {
-    margin-bottom: 0.625rem;
-    order: 1;
+    order: 2;
+    margin-top: 1.5rem;
+    border-radius: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
   }
 
   button[type="button"] {
-    order: 2;
-  }
-
-  mat-form-field {
-    order: 0;
-  }
-
-  .error-message {
-    order: -1;
+    order: 3;
   }
 
   button {
