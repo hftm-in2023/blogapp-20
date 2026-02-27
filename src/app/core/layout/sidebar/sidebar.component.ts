@@ -13,7 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
-import { map, shareReplay } from 'rxjs/operators';
+import { map, shareReplay, startWith } from 'rxjs/operators';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -46,6 +46,12 @@ export class SidebarComponent {
   readonly #themeStore = inject(ThemeStore);
   protected readonly isLoading = inject(RouterStore).isLoading;
   protected readonly isDarkMode = this.#themeStore.isDarkMode;
+  protected readonly currentLang = toSignal(
+    this.#translate.onLangChange.pipe(
+      map((event) => event.lang),
+      startWith(this.#translate.currentLang || 'en'),
+    ),
+  );
 
   isAuthenticated = input.required<boolean>();
   roles = input.required<string[] | null>();

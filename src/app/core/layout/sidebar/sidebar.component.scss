@@ -106,5 +106,11 @@
       background: var(--mat-sys-surface-container-high);
       color: var(--mat-sys-on-surface);
     }
+
+    &.active {
+      background: var(--mat-sys-primary);
+      color: var(--mat-sys-on-primary);
+      font-weight: 600;
+    }
   }
 }

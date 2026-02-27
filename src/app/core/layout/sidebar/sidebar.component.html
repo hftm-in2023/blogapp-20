@@ -89,6 +89,7 @@
         <div class="lang-toggle">
           <a
             class="language-selector"
+            [class.active]="currentLang() === 'de'"
             tabindex="0"
             (click)="changeLanguage('de')"
             (keydown)="changeLanguage('de')"
@@ -96,6 +97,7 @@
           >
           <a
             class="language-selector"
+            [class.active]="currentLang() === 'en'"
             tabindex="0"
             (click)="changeLanguage('en')"
             (keydown)="changeLanguage('en')"
