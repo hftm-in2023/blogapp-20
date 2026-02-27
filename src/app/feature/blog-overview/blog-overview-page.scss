@@ -5,28 +5,33 @@
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
+    gap: 0.5rem;
+    padding-top: 4.5rem;
+    padding-bottom: 3rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
   }
 
   @media screen and (min-width: 450px) {
     .blog-container {
-      width: 400px;
+      width: 420px;
       justify-content: flex-start;
     }
   }
 
-  @media screen and (min-width: 841px) {
+  @media screen and (min-width: 860px) {
     .blog-container {
       width: 840px;
     }
   }
 
-  @media screen and (min-width: 1261px) {
+  @media screen and (min-width: 1280px) {
     .blog-container {
       width: 1260px;
     }
   }
 
-  @media screen and (min-width: 1681px) {
+  @media screen and (min-width: 1700px) {
     .blog-container {
       width: 1680px;
     }

@@ -1,33 +1,110 @@
 :host {
   .blog-card {
-    margin: 0.625rem;
-    width: calc(100vw - 1.25rem);
+    margin: 0.75rem;
+    width: calc(100vw - 1.5rem);
+    border-radius: 1rem;
+    border: 1px solid var(--mat-sys-outline-variant);
+    overflow: hidden;
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease,
+      border-color 0.25s ease;
+
+    &:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+      border-color: var(--mat-sys-primary);
+    }
 
     .card-title {
-      min-height: 4rem;
+      font-family: "Inter", "Roboto", sans-serif;
+      font-size: 1.125rem;
+      font-weight: 600;
+      line-height: 1.4;
+      min-height: 3rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    mat-card-header {
+      cursor: pointer;
+      padding: 1.25rem 1rem 0.5rem;
     }
 
     .blog-image {
-      border-radius: 0.8rem;
-      margin: 0.8rem;
+      border-radius: 0;
+      margin: 0;
+      width: 100%;
+      object-fit: cover;
+      aspect-ratio: 348 / 300;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+
+      &:hover {
+        transform: scale(1.02);
+      }
+    }
+
+    mat-card-content {
+      padding: 0.75rem 1rem;
+
+      p {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        color: var(--mat-sys-on-surface-variant);
+        line-height: 1.6;
+        font-size: 0.875rem;
+        margin: 0;
+      }
     }
 
     .blog-footer {
       display: flex;
+      align-items: center;
+      padding: 0.5rem 0.5rem 0.75rem;
+      border-top: 1px solid var(--mat-sys-outline-variant);
 
       .blog-author {
         flex-grow: 1;
+        padding-left: 0.5rem;
 
         p {
-          margin-top: 0;
+          margin: 0;
+          font-size: 0.8125rem;
+          font-weight: 500;
+          color: var(--mat-sys-on-surface-variant);
         }
+      }
+    }
+
+    button[data-testid="like-button"],
+    button[data-testid="share-button"] {
+      transition: transform 0.15s ease;
+
+      &:hover {
+        transform: scale(1.12);
       }
     }
   }
 
   @media screen and (min-width: 450px) {
     .blog-card {
-      width: 400px;
+      width: 380px;
+    }
+  }
+}
+
+// ── Dark mode card adjustments ──
+:host-context(.dark-mode) {
+  .blog-card {
+    border-color: transparent;
+
+    &:hover {
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
     }
   }
 }
