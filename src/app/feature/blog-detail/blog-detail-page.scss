@@ -1,0 +1,13 @@
+:host {
+  display: block;
+  padding-top: 5rem;
+  padding-bottom: 2rem;
+
+  .detail-container {
+    max-width: 48rem;
+    margin: 0 auto;
+    padding: 1.5rem;
+    line-height: 1.7;
+    color: var(--mat-sys-on-surface);
+  }
+}

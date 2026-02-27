@@ -18,6 +18,7 @@
 
 .header-toolbar {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   padding: 0 1rem;
   position: fixed;
@@ -25,13 +26,20 @@
 
   .blog-app-title {
     cursor: pointer;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 0.85;
+    }
   }
 }
 
 #profileImage {
   width: 2.1875rem;
   height: 2.1875rem;
-  border-radius: 1.25rem;
+  border-radius: 50%;
   background: var(--mat-sys-primary);
   font-size: 0.9rem;
   color: var(--mat-sys-on-primary);
@@ -39,6 +47,14 @@
   line-height: 2.1875rem;
   text-transform: uppercase;
   cursor: pointer;
+  transition:
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 0 0 3px var(--mat-sys-primary-container);
+    transform: scale(1.05);
+  }
 }
 
 .add-blog {
@@ -50,12 +66,17 @@
 }
 
 .language-selector {
-  margin-left: 3px;
-  margin-right: 3px;
+  margin-left: 0.25rem;
+  margin-right: 0.25rem;
   cursor: pointer;
-  width: 60px;
+  width: 3.75rem;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.8;
+  }
 
   &:nth-last-of-type(1) {
-    margin-right: 50px;
+    margin-right: 3rem;
   }
 }

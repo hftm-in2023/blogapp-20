@@ -4,27 +4,11 @@
     margin: 1rem 0;
     color: var(--mat-sys-error);
     background-color: var(--mat-sys-error-container);
+    border-radius: 0.5rem;
   }
 
   .mat-icon {
     padding-right: 0.3125rem;
-  }
-
-  .mat-toolbar.mat-primary {
-    position: fixed;
-    top: 0;
-    z-index: 2;
-    cursor: pointer;
-  }
-
-  .submit-button {
-    margin-bottom: 0.625rem;
-    margin-top: 1.25rem;
-  }
-
-  button {
-    width: 12.5rem;
-    margin-left: auto;
   }
 
   .blog-input {
@@ -32,11 +16,43 @@
     flex-direction: column;
     margin-left: auto;
     margin-right: auto;
-    width: 80%;
+    padding-top: 5rem;
+    padding-bottom: 2rem;
+    width: 90%;
+    max-width: 48rem;
 
     mat-form-field.mat-mdc-form-field {
       margin-top: 0.625rem;
       width: 100%;
+    }
+  }
+
+  .submit-button {
+    margin-bottom: 0.625rem;
+    order: 1;
+  }
+
+  button[type="button"] {
+    order: 2;
+  }
+
+  mat-form-field {
+    order: 0;
+  }
+
+  .error-message {
+    order: -1;
+  }
+
+  button {
+    width: 12.5rem;
+    margin-left: auto;
+    margin-top: 0.5rem;
+  }
+
+  @media screen and (min-width: 600px) {
+    .blog-input {
+      width: 80%;
     }
   }
 }
