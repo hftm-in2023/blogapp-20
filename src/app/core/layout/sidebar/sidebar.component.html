@@ -86,23 +86,24 @@
       }
 
       @if (isHandset() === false) {
-        <a
-          class="language-selector"
-          mat-list-item
-          tabindex="0"
-          (click)="changeLanguage('de')"
-          (keydown)="changeLanguage('de')"
-          >DE</a
-        >
-        <span>|</span>
-        <a
-          class="language-selector"
-          mat-list-item
-          tabindex="0"
-          (click)="changeLanguage('en')"
-          (keydown)="changeLanguage('en')"
-          >EN</a
-        >
+        <div class="lang-toggle">
+          <a
+            class="language-selector"
+            [class.active]="currentLang() === 'de'"
+            tabindex="0"
+            (click)="changeLanguage('de')"
+            (keydown)="changeLanguage('de')"
+            >DE</a
+          >
+          <a
+            class="language-selector"
+            [class.active]="currentLang() === 'en'"
+            tabindex="0"
+            (click)="changeLanguage('en')"
+            (keydown)="changeLanguage('en')"
+            >EN</a
+          >
+        </div>
       }
 
       @if (isHandset() === false) {
@@ -119,6 +120,7 @@
       @if (isAuthenticated()) {
         <div
           id="profileImage"
+          tabindex="0"
           matTooltip="{{
             'SIDEBAR.LOGGEDIN_USER'
               | translate: { value: userData()?.preferred_username }
