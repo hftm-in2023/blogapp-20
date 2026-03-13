@@ -30,7 +30,7 @@ export const APP_ROUTES: Routes = [
   {
     path: 'add-blog',
     loadComponent: () => import('./feature/add-blog/add-blog-page'),
-    canActivate: [authGuard],
+    canMatch: [authGuard],
   },
   ...ERROR_ROUTES,
   ...STATIC_ROUTES,
