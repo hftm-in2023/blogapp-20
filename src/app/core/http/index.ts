@@ -1,4 +1,5 @@
 import { loggingInterceptor } from './logging';
+import { cookieInterceptor } from './cookie';
 
-const coreInterceptors = [/*correlationInterceptor*/ loggingInterceptor];
+const coreInterceptors = [loggingInterceptor, cookieInterceptor];
 export default coreInterceptors;

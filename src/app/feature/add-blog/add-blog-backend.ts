@@ -20,7 +20,7 @@ export class AddBlogBackend {
   addBlog(blog: CreatedBlog) {
     CreatedBlogSchema.parse(blog);
     return lastValueFrom(
-      this.#httpClient.post(`${environment.serviceUrl}/entries`, blog),
+      this.#httpClient.post(`${environment.bffUrl}/entries`, blog),
     );
   }
 }

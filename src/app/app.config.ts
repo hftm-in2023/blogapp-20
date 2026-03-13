@@ -14,8 +14,6 @@ import {
 } from '@angular/common/http';
 import { provideGlobalErrorHandler } from './core/error/provider';
 import coreInterceptors from './core/http';
-import { authInterceptor, provideAuth } from 'angular-auth-oidc-client';
-import { authConfig } from './core/auth/auth.config';
 
 import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -26,12 +24,8 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
     provideRouter(APP_ROUTES, withComponentInputBinding()),
-    provideHttpClient(
-      withFetch(),
-      withInterceptors([...coreInterceptors, authInterceptor()]),
-    ),
+    provideHttpClient(withFetch(), withInterceptors([...coreInterceptors])),
     provideGlobalErrorHandler(),
-    provideAuth(authConfig),
     provideTranslateService({
       loader: provideTranslateHttpLoader({
         prefix: '/i18n/',

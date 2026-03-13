@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthStore } from './core/auth';
 import { SidebarComponent } from './core/layout/sidebar/sidebar.component';
 
@@ -10,6 +11,7 @@ import { SidebarComponent } from './core/layout/sidebar/sidebar.component';
 })
 export class App {
   readonly #authStore = inject(AuthStore);
+  readonly #router = inject(Router);
 
   onModeChange($event: string) {
     console.log(`event fired ${$event}`);
@@ -21,10 +23,12 @@ export class App {
   roles = this.#authStore.roles;
 
   login() {
-    this.#authStore.login();
+    this.#router.navigate(['/login']);
   }
 
   logout() {
-    this.#authStore.logout();
+    this.#authStore.logout().then(() => {
+      this.#router.navigate(['/']);
+    });
   }
 }

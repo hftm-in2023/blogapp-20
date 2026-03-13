@@ -15,7 +15,7 @@ export class GlobalErrorHandler implements ErrorHandler {
 
   async postCustomData(error: Error, message: string) {
     try {
-      await fetch(`${environment.serviceUrl}/api/report-error/client-fatal`, {
+      await fetch(`${environment.bffUrl}/report-error/client-fatal`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

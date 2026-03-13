@@ -11,6 +11,10 @@ export const APP_ROUTES: Routes = [
     pathMatch: 'full',
   },
   {
+    path: 'login',
+    loadComponent: () => import('./feature/login/login-page'),
+  },
+  {
     path: 'demo',
     loadComponent: () => import('./feature/demo/demo'),
   },

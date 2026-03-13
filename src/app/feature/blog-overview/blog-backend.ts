@@ -38,7 +38,7 @@ export class BlogBackend {
 
   getBlogPosts(): Observable<Entries> {
     return this.#httpClient
-      .get<Entries>(`${environment.serviceUrl}/entries`)
+      .get<Entries>(`${environment.bffUrl}/entries`)
       .pipe(map((entries) => EntriesSchema.parse(entries)));
   }
 }

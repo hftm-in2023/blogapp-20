@@ -37,6 +37,11 @@ yarn-error.log
 testem.log
 /typings
 
+# BFF
+bff/local.settings.json
+bff/node_modules
+bff/dist
+
 # System files
 .DS_Store
 Thumbs.db
