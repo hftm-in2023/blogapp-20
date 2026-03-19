@@ -65,7 +65,7 @@ describe('BlogCard', () => {
     );
     expect(node.innerText).toBe('A title');
   });
-  it('should show the like button in black when likedByMe is false', () => {
+  it('should show the like button without liked class when likedByMe is false', () => {
     // arrange
     fixture.componentRef.setInput('model', {
       id: 1,
@@ -79,9 +79,9 @@ describe('BlogCard', () => {
     const matIcon = fixture.debugElement.query(
       By.css('[data-testid="like-button-icon"]'),
     );
-    expect(matIcon.styles['color']).toBe('');
+    expect(matIcon.nativeElement.classList.contains('liked')).toBe(false);
   });
-  it('should show the like button in red when likedByMe is true', () => {
+  it('should show the like button with liked class when likedByMe is true', () => {
     // arrange
     fixture.componentRef.setInput('model', {
       id: 1,
@@ -95,7 +95,7 @@ describe('BlogCard', () => {
     const matIcon = fixture.debugElement.query(
       By.css('[data-testid="like-button-icon"]'),
     );
-    expect(matIcon.styles['color']).toBe('red');
+    expect(matIcon.nativeElement.classList.contains('liked')).toBe(true);
   });
   it('should navigate to a certain blog when the image or header is clicked', () => {
     // arrange

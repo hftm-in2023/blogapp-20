@@ -1,14 +1,16 @@
 {
   "SIDEBAR": {
-    "CREATE_NEW_BLOG_BUTTON": "Erstelle einen neuen Blog!",
+    "CREATE_NEW_BLOG_BUTTON": "Schreiben",
     "LOGGEDIN_USER": "Sie sind eingeloggt als {{ value }}",
-    "SEARCH_PLACEHOLDER": "Suche"
+    "SEARCH_PLACEHOLDER": "Suche",
+    "HOME": "Startseite",
+    "LANGUAGE": "Sprache"
   },
   "ADD_BLOG_PAGE": {
     "NAVIGATION_BACK_TITLE": "Zurück zur Übersicht"
   },
   "LOGIN": {
-    "TITLE": "Anmelden",
+    "TITLE": "Anmelden um fortzufahren",
     "USERNAME": "Benutzername",
     "PASSWORD": "Passwort",
     "SUBMIT": "Anmelden"

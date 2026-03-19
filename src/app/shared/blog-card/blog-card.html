@@ -1,50 +1,46 @@
-<mat-card class="blog-card">
-  <mat-card-header [routerLink]="routeCommands()">
-    <mat-card-title class="card-title" data-testid="title"
-      >{{ model().title }}</mat-card-title
-    >
-  </mat-card-header>
-  @defer (on viewport) {
-  <img
-    height="300"
-    class="blog-image"
-    [routerLink]="routeCommands()"
-    mat-card-image
-    src="{{ 'https://picsum.photos/seed/' + model().id + '/348/300' }}"
-    alt="Random Photo"
-  />
-  } @placeholder {
-  <img alt="image of the blog" height="300" class="blog-image" />
-  }
-  <mat-card-content>
-    <p>{{ model().contentPreview }}</p>
-  </mat-card-content>
-  <mat-card-footer class="blog-footer">
-    <mat-card-content class="blog-author">
-      <p>{{ model().author }}</p>
-    </mat-card-content>
-    <mat-card-actions MatCardActions.align="end">
-      <button
-        data-testid="like-button"
-        mat-icon-button
-        aria-label="Example icon button with a heart icon"
-        (click)="
-          likeBlog.emit({ id: model().id, likedByMe: model().likedByMe })
-        "
-      >
-        <mat-icon
-          data-testid="like-button-icon"
-          [ngStyle]="{ color: model().likedByMe ? 'red' : '' }"
-          >favorite</mat-icon
+<article class="editorial-card" [routerLink]="routeCommands()">
+  <div class="card-image-wrapper">
+    @defer (on viewport) {
+    <img
+      class="card-image"
+      [src]="'https://picsum.photos/seed/' + model().id + '/600/400'"
+      alt="Article cover"
+      loading="lazy"
+    />
+    } @placeholder {
+    <div class="card-image-placeholder"></div>
+    }
+  </div>
+  <div class="card-body">
+    <h3 class="card-title" data-testid="title">{{ model().title }}</h3>
+    <p class="card-preview">{{ model().contentPreview }}</p>
+    <div class="card-meta">
+      <span class="card-author">{{ model().author }}</span>
+      <div class="card-actions">
+        <button
+          data-testid="like-button"
+          class="card-action-btn"
+          (click)="likeBlog.emit({ id: model().id, likedByMe: model().likedByMe }); $event.stopPropagation()"
+          aria-label="Like this article"
         >
-      </button>
-      <button
-        data-testid="share-button"
-        mat-icon-button
-        aria-label="Example icon button with a shareicon"
-      >
-        <mat-icon>share</mat-icon>
-      </button>
-    </mat-card-actions>
-  </mat-card-footer>
-</mat-card>
+          <mat-icon
+            data-testid="like-button-icon"
+            [class.liked]="model().likedByMe"
+            >{{ model().likedByMe ? 'favorite' : 'favorite_border' }}</mat-icon
+          >
+          @if (model().likes > 0) {
+          <span class="action-count">{{ model().likes }}</span>
+          }
+        </button>
+        <button
+          data-testid="share-button"
+          class="card-action-btn"
+          (click)="$event.stopPropagation()"
+          aria-label="Share this article"
+        >
+          <mat-icon>bookmark_border</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</article>

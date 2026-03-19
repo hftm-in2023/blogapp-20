@@ -1,33 +1,140 @@
 :host {
-  .blog-card {
-    margin: 0.625rem;
-    width: calc(100vw - 1.25rem);
+  display: block;
+}
 
-    .card-title {
-      min-height: 4rem;
-    }
+.editorial-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--mat-sys-surface-container-lowest);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease;
+  margin: 0.75rem;
 
-    .blog-image {
-      border-radius: 0.8rem;
-      margin: 0.8rem;
-    }
+  &:hover {
+    transform: translateY(-2px);
+    background: var(--mat-sys-surface-container-low);
+  }
+}
 
-    .blog-footer {
-      display: flex;
+.card-image-wrapper {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3 / 2;
+}
 
-      .blog-author {
-        flex-grow: 1;
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
 
-        p {
-          margin-top: 0;
-        }
-      }
-    }
+  .editorial-card:hover & {
+    transform: scale(1.03);
+  }
+}
+
+.card-image-placeholder {
+  width: 100%;
+  height: 100%;
+  background: var(--mat-sys-surface-container);
+}
+
+.card-body {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.card-title {
+  font-family: var(--editorial-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--mat-sys-on-surface);
+  margin: 0 0 0.625rem;
+  letter-spacing: -0.01em;
+}
+
+.card-preview {
+  font-family: var(--editorial-serif);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--mat-sys-on-surface-variant);
+  margin: 0 0 1rem;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card-author {
+  font-family: var(--editorial-sans);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--mat-sys-on-surface);
+}
+
+.card-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.card-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  background: none;
+  border: none;
+  padding: 0.25rem;
+  cursor: pointer;
+  color: var(--mat-sys-on-surface-variant);
+  border-radius: 50%;
+  transition: color 0.15s ease;
+
+  &:hover {
+    color: var(--mat-sys-on-surface);
   }
 
-  @media screen and (min-width: 450px) {
-    .blog-card {
-      width: 400px;
+  mat-icon {
+    font-size: 1.125rem;
+    width: 1.125rem;
+    height: 1.125rem;
+
+    &.liked {
+      color: #e74c3c;
+    }
+  }
+}
+
+.action-count {
+  font-family: var(--editorial-sans);
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+// ── Responsive ──
+:host {
+  .editorial-card {
+    width: calc(100vw - 2.5rem);
+  }
+
+  @media screen and (min-width: 480px) {
+    .editorial-card {
+      width: 380px;
     }
   }
 }

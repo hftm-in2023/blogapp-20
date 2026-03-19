@@ -7,106 +7,105 @@
     [mode]="'over'"
     [opened]="false"
   >
-    <mat-toolbar>Menu</mat-toolbar>
+    <div class="sidenav-header">
+      <a
+        class="sidenav-brand"
+        (click)="drawer.close()"
+        [routerLink]="['/overview/']"
+        >The Record</a
+      >
+      <button mat-icon-button (click)="drawer.close()" aria-label="Close menu">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
     <mat-nav-list>
+      <a mat-list-item [routerLink]="['/overview/']" (click)="drawer.close()">
+        <mat-icon matListItemIcon>explore</mat-icon>
+        {{ "SIDEBAR.HOME" | translate }}
+      </a>
       @if (canAddBlog()) {
-        <a mat-list-item [routerLink]="['/add-blog/']">{{
-          "SIDEBAR.CREATE_NEW_BLOG_BUTTON" | translate
-        }}</a>
+        <a mat-list-item [routerLink]="['/add-blog/']" (click)="drawer.close()">
+          <mat-icon matListItemIcon>edit_note</mat-icon>
+          {{ "SIDEBAR.CREATE_NEW_BLOG_BUTTON" | translate }}
+        </a>
       }
-      @switch (isAuthenticated()) {
-        @case (false) {
-          <a
-            mat-list-item
-            tabindex="0"
-            (click)="login.emit()"
-            (keydown)="login.emit()"
-            >Login</a
-          >
-        }
-        @case (true) {
-          <a
-            mat-list-item
-            tabindex="1"
-            (click)="logout.emit()"
-            (keydown)="logout.emit()"
-            >Log out</a
-          >
-        }
+      <mat-divider></mat-divider>
+      <div class="sidenav-section-label">
+        {{ "SIDEBAR.LANGUAGE" | translate }}
+      </div>
+      <button mat-list-item (click)="changeLanguage('de'); drawer.close()">
+        Deutsch
+      </button>
+      <button mat-list-item (click)="changeLanguage('en'); drawer.close()">
+        English
+      </button>
+      <mat-divider></mat-divider>
+      <button mat-list-item (click)="toggleTheme(); drawer.close()">
+        <mat-icon matListItemIcon>{{
+          isDarkMode() ? "light_mode" : "dark_mode"
+        }}</mat-icon>
+        {{ isDarkMode() ? "Light Mode" : "Dark Mode" }}
+      </button>
+      <mat-divider></mat-divider>
+      @if (isAuthenticated()) {
+        <button mat-list-item (click)="logout.emit(); drawer.close()">
+          <mat-icon matListItemIcon>logout</mat-icon>
+          Logout
+        </button>
+      } @else {
+        <button mat-list-item (click)="login.emit(); drawer.close()">
+          <mat-icon matListItemIcon>login</mat-icon>
+          Login
+        </button>
       }
-      <a
-        mat-list-item
-        tabindex="0"
-        (click)="changeLanguage('de')"
-        (keydown)="changeLanguage('de')"
-        >Deutsch</a
-      >
-      <a
-        mat-list-item
-        tabindex="0"
-        (click)="changeLanguage('en')"
-        (keydown)="changeLanguage('en')"
-        >English</a
-      >
-      <a
-        mat-list-item
-        tabindex="0"
-        (click)="toggleTheme()"
-        (keydown)="toggleTheme()"
-        >{{ isDarkMode() ? "Light Mode" : "Dark Mode" }}</a
-      >
     </mat-nav-list>
   </mat-sidenav>
+
   <mat-sidenav-content>
-    <mat-toolbar color="primary" class="header-toolbar">
+    <nav class="editorial-nav">
       @if (isHandset()) {
         <button
           type="button"
+          class="nav-menu-btn"
+          mat-icon-button
           aria-label="Toggle sidenav"
-          matIconButton
           (click)="drawer.toggle()"
         >
-          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+          <mat-icon>menu</mat-icon>
         </button>
       }
-      <span class="blog-app-title" [routerLink]="['/overview/']">Blog App</span>
-      <span class="spacer"></span>
 
-      @if (isHandset() === false) {
+      <a class="nav-brand" [routerLink]="['/overview/']">The Record</a>
+
+      <span class="nav-spacer"></span>
+
+      @if (!isHandset()) {
         @if (canAddBlog()) {
-          <button
-            class="add-blog"
-            mat-flat-button
-            color="accent"
-            routerLink="/add-blog"
-          >
+          <a class="nav-write-btn" routerLink="/add-blog">
+            <mat-icon class="nav-write-icon">edit_note</mat-icon>
             {{ "SIDEBAR.CREATE_NEW_BLOG_BUTTON" | translate }}
-          </button>
+          </a>
         }
-      }
 
-      @if (isHandset() === false) {
-        <a
-          class="language-selector"
-          mat-list-item
-          tabindex="0"
-          (click)="changeLanguage('de')"
-          (keydown)="changeLanguage('de')"
-          >DE</a
-        >
-        <span>|</span>
-        <a
-          class="language-selector"
-          mat-list-item
-          tabindex="0"
-          (click)="changeLanguage('en')"
-          (keydown)="changeLanguage('en')"
-          >EN</a
-        >
-      }
+        <div class="nav-lang-group">
+          <button
+            class="nav-lang-btn"
+            [class.active]="currentLang() === 'de'"
+            (click)="changeLanguage('de')"
+          >
+            DE
+          </button>
+          <button
+            class="nav-lang-btn"
+            [class.active]="currentLang() === 'en'"
+            (click)="changeLanguage('en')"
+          >
+            EN
+          </button>
+        </div>
 
-      @if (isHandset() === false) {
         <button
+          class="nav-icon-btn"
           mat-icon-button
           matTooltip="Toggle theme"
           aria-label="Toggle light/dark theme"
@@ -118,7 +117,7 @@
 
       @if (isAuthenticated()) {
         <div
-          id="profileImage"
+          class="nav-avatar"
           matTooltip="{{
             'SIDEBAR.LOGGEDIN_USER'
               | translate: { value: userData()?.preferred_username }
@@ -127,9 +126,9 @@
         ></div>
         <button
           data-testid="logout-button"
+          class="nav-icon-btn"
           mat-icon-button
           matTooltip="Logout"
-          class="example-icon favorite-icon"
           aria-label="Logout button"
           (click)="logout.emit()"
         >
@@ -138,19 +137,25 @@
       } @else {
         <button
           data-testid="login-button"
+          class="nav-icon-btn"
           mat-icon-button
           matTooltip="Login"
-          class="example-icon favorite-icon"
           aria-label="Login button"
           (click)="login.emit()"
         >
           <mat-icon>login</mat-icon>
         </button>
       }
-    </mat-toolbar>
+    </nav>
+
     @if (isLoading()) {
-      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      <div class="reading-progress">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      </div>
     }
-    <router-outlet></router-outlet>
+
+    <main class="editorial-content">
+      <router-outlet></router-outlet>
+    </main>
   </mat-sidenav-content>
 </mat-sidenav-container>

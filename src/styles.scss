@@ -1,37 +1,57 @@
 @use "@angular/material" as mat;
+@use "./styles/theme-colors" as theme-colors;
 
-// ── Light theme (azure primary) ──
-$light-theme: mat.define-theme(
-  (
-    color: (
-      theme-type: light,
-      primary: mat.$azure-palette,
-      tertiary: mat.$blue-palette,
-    ),
-  )
-);
-
-// ── Dark theme (blue primary) ──
-$dark-theme: mat.define-theme(
-  (
-    color: (
-      theme-type: dark,
-      primary: mat.$blue-palette,
-      tertiary: mat.$azure-palette,
-    ),
-  )
-);
-
-// ── Apply light theme as default on <html> ──
+// ── Light theme (default) ──
 html {
-  @include mat.all-component-themes($light-theme);
+  @include mat.theme(
+    (
+      color: (
+        theme-type: light,
+        primary: theme-colors.$primary-palette,
+        tertiary: theme-colors.$tertiary-palette,
+      ),
+      typography: (
+        brand-family: (
+          "Newsreader",
+          Georgia,
+          "Times New Roman",
+          serif,
+        ),
+        plain-family: (
+          "Inter",
+          -apple-system,
+          BlinkMacSystemFont,
+          sans-serif,
+        ),
+      ),
+      density: 0,
+    )
+  );
+
+  // Editorial design tokens (not part of Material's system)
+  --editorial-green: #1a8917;
+  --editorial-green-dark: #006e05;
+  --editorial-serif: "Newsreader", Georgia, "Times New Roman", serif;
+  --editorial-sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-// ── Apply dark theme color overrides on .dark-mode ──
+// ── Dark theme ──
 .dark-mode {
-  @include mat.all-component-colors($dark-theme);
+  @include mat.theme(
+    (
+      color: (
+        theme-type: dark,
+        primary: theme-colors.$primary-palette,
+        tertiary: theme-colors.$tertiary-palette,
+      ),
+    )
+  );
+
+  --editorial-green: #74de63;
+  --editorial-green-dark: #90fb7c;
 }
 
+// ── Global Styles ──
 html,
 body {
   height: 100%;
@@ -39,5 +59,36 @@ body {
 
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: var(--editorial-sans);
+  background-color: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// ── Editorial Typography Utilities ──
+.editorial-display {
+  font-family: var(--editorial-serif);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.editorial-headline {
+  font-family: var(--editorial-serif);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.editorial-body {
+  font-family: var(--editorial-serif);
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.editorial-label {
+  font-family: var(--editorial-sans);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
 }

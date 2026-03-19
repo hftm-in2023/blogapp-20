@@ -1,1 +1,40 @@
-The id of the Blog: {{ id() }}
+<article class="article-page">
+  <header class="article-header">
+    <span class="article-category editorial-label">Artikel</span>
+    <h1 class="article-title">Blog #{{ id() }}</h1>
+    <p class="article-subtitle">
+      Eine Erkundung von Ideen, die unser Denken formen und die Art veraendern,
+      wie wir die Welt sehen.
+    </p>
+    <div class="article-meta">
+      <div class="author-info">
+        <div class="author-avatar">A</div>
+        <div class="author-details">
+          <span class="author-name">Autor</span>
+          <span class="article-date">Veroeffentlicht am 19. Maerz 2026</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="article-hero">
+    <img
+      class="hero-image"
+      src="https://picsum.photos/seed/{{ id() }}/1200/600"
+      alt="Article hero image"
+    />
+  </div>
+
+  <div class="article-body editorial-body">
+    <p>
+      Der Inhalt dieses Blog-Beitrags wird hier angezeigt. Dies ist ein
+      Platzhaltertext, der die redaktionelle Typografie und das Layout des
+      Lesebereichs demonstriert.
+    </p>
+    <p>
+      In der endgueltigen Implementierung wuerde dieser Bereich den
+      vollstaendigen Artikelinhalt enthalten, mit angemessener
+      Absatzformatierung, Ueberschriften und allen eingebetteten Medien.
+    </p>
+  </div>
+</article>

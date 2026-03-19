@@ -5,6 +5,7 @@ import {
   inject,
   input,
   output,
+  signal,
   Signal,
 } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
@@ -13,6 +14,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDivider } from '@angular/material/divider';
 import { map, shareReplay } from 'rxjs/operators';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -37,6 +39,7 @@ import { ThemeStore } from '../../theme';
     MatTooltipModule,
     TranslatePipe,
     MatProgressBar,
+    MatDivider,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -46,6 +49,7 @@ export class SidebarComponent {
   readonly #themeStore = inject(ThemeStore);
   protected readonly isLoading = inject(RouterStore).isLoading;
   protected readonly isDarkMode = this.#themeStore.isDarkMode;
+  protected readonly currentLang = signal(this.#translate.currentLang || 'en');
 
   isAuthenticated = input.required<boolean>();
   roles = input.required<string[] | null>();
@@ -79,6 +83,7 @@ export class SidebarComponent {
 
   changeLanguage(language: string) {
     this.#translate.use(language);
+    this.currentLang.set(language);
   }
 
   toggleTheme() {

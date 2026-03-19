@@ -1,5 +1,11 @@
 @if (model()) {
-<div class="blog-container">
+<div class="overview-header">
+  <h1 class="overview-title">Entdecken</h1>
+  <p class="overview-subtitle">
+    Geschichten, Ideen und Perspektiven von unserer Community.
+  </p>
+</div>
+<div class="blog-feed">
   @for (blog of model().data; track blog.id; let i = $index) {
   <BlogCard
     [model]="blog"

@@ -1,45 +1,62 @@
-<form (submit)="onSubmit($event)">
-  <div class="blog-input">
-    @if (state().error) {
-    <div class="error-message" color="warn">
-      Oups, der Blog konnte nicht gespeichert werden. Bitte versuchen Sie es
-      später nochmals.
+<div class="editor-page">
+  <div class="editor-header">
+    <h1 class="editor-title">Neuen Beitrag verfassen</h1>
+    <div class="editor-actions-top">
+      <button
+        type="button"
+        class="editor-reset-btn"
+        mat-button
+        (click)="onReset()"
+      >
+        Zuruecksetzen
+      </button>
+      <button
+        type="button"
+        class="editor-publish-btn"
+        mat-flat-button
+        [disabled]="submitButtonDisabled()"
+        (click)="onSubmit($event)"
+      >
+        Veroeffentlichen
+      </button>
     </div>
-    }
-    <button
-      type="submit"
-      class="submit-button"
-      mat-flat-button
-      [disabled]="submitButtonDisabled()"
-      color="primary"
-    >
-      Publish blog
-    </button>
-    <button
-      type="button"
-      mat-raised-button
-      color="secondary"
-      (click)="onReset()"
-    >
-      Reset
-    </button>
-    <mat-form-field appearance="fill">
-      <mat-label>Title</mat-label>
-      <input matInput [formField]="blogForm.title" />
+  </div>
+
+  @if (state().error) {
+  <div class="error-banner">
+    Oups, der Blog konnte nicht gespeichert werden. Bitte versuchen Sie es
+    spaeter nochmals.
+  </div>
+  }
+
+  <form class="editor-form" (submit)="onSubmit($event)">
+    <mat-form-field appearance="outline" class="editor-title-field">
+      <mat-label>Titel</mat-label>
+      <input
+        matInput
+        [formField]="blogForm.title"
+        placeholder="Geben Sie Ihrem Beitrag einen Titel..."
+      />
       <mat-error>
         @for (error of blogForm.title().errors(); track error.kind) {
         <span>{{ error.message }}</span>
         }
       </mat-error>
     </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>Tell your story...</mat-label>
-      <textarea matInput rows="20" [formField]="blogForm.content"></textarea>
+
+    <mat-form-field appearance="outline" class="editor-content-field">
+      <mat-label>Erzaehlen Sie Ihre Geschichte...</mat-label>
+      <textarea
+        matInput
+        rows="24"
+        [formField]="blogForm.content"
+        class="editor-textarea"
+      ></textarea>
       <mat-error>
         @for (error of blogForm.content().errors(); track error.kind) {
         <span>{{ error.message }}</span>
         }
       </mat-error>
     </mat-form-field>
-  </div>
-</form>
+  </form>
+</div>

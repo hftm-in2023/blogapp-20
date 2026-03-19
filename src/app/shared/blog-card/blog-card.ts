@@ -4,11 +4,8 @@ import {
   input,
   output,
 } from '@angular/core';
-import { NgStyle } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
-import { MatCardModule } from '@angular/material/card';
 
 export type Blog = {
   author: string;
@@ -26,7 +23,7 @@ export type Blog = {
   templateUrl: './blog-card.html',
   styleUrls: ['./blog-card.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [MatCardModule, RouterLink, MatButtonModule, MatIconModule, NgStyle],
+  imports: [RouterLink, MatIconModule],
 })
 export class BlogCard {
   readonly model = input.required<Blog>();
