@@ -21,7 +21,7 @@ az staticwebapp appsettings set --name <DEIN-SWA-NAME> \
   SESSION_SECRET="$(openssl rand -base64 32)" \
   KEYCLOAK_URL="https://d-cap-keyclaok.kindbay-711f60b2.westeurope.azurecontainerapps.io/realms/blog" \
   KEYCLOAK_CLIENT_ID="bff-blog" \
-  KEYCLOAK_CLIENT_SECRET="R8jk2D8da7omHBxp6wH8YiYROxv8CZvn" \
+  KEYCLOAK_CLIENT_SECRET="" \
   BLOG_BACKEND_URL="https://d-cap-blog-backend---v2.whitepond-b96fee4b.westeurope.azurecontainerapps.io" \
   ALLOWED_ORIGIN="https://<DEIN-HOSTNAME>.azurestaticapps.net"
 ```
