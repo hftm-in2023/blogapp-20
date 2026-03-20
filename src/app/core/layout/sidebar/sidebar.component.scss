@@ -5,6 +5,13 @@
 .sidenav {
   width: 280px;
   background: var(--mat-sys-surface);
+
+  button[mat-list-item] {
+    border: none;
+    border-radius: 0;
+    background: none;
+    text-align: start;
+  }
 }
 
 .sidenav-header {
