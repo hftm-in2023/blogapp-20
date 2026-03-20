@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { BlogCard } from '../../shared/blog-card/blog-card';
 
 type Model = {
@@ -21,7 +22,7 @@ type Model = {
 
 @Component({
   selector: 'app-blog-overview-page',
-  imports: [BlogCard],
+  imports: [BlogCard, TranslatePipe],
   templateUrl: './blog-overview-page.html',
   styleUrl: './blog-overview-page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -2,11 +2,32 @@
   "SIDEBAR": {
     "CREATE_NEW_BLOG_BUTTON": "Write",
     "LOGGEDIN_USER": "You are logged in as {{ value }}",
-    "SEARCH_PLACEHOLDER": "Search",
     "HOME": "Home",
-    "LANGUAGE": "Language"
+    "LANGUAGE": "Language",
+    "DEUTSCH": "Deutsch",
+    "ENGLISH": "English",
+    "LIGHT_MODE": "Light Mode",
+    "DARK_MODE": "Dark Mode",
+    "LOGOUT": "Logout",
+    "LOGIN": "Login",
+    "TOGGLE_THEME": "Toggle theme"
   },
-  "ADD_BLOG_PAGE": {
+  "OVERVIEW": {
+    "TITLE": "Discover",
+    "SUBTITLE": "Stories, ideas, and perspectives from our community."
+  },
+  "DETAIL": {
+    "CATEGORY": "Article",
+    "BLOG_TITLE": "Blog #{{ value }}"
+  },
+  "ADD_BLOG": {
+    "TITLE": "Write a new post",
+    "RESET": "Reset",
+    "PUBLISH": "Publish",
+    "ERROR": "Oops, the blog could not be saved. Please try again later.",
+    "FIELD_TITLE": "Title",
+    "FIELD_TITLE_PLACEHOLDER": "Give your post a title...",
+    "FIELD_CONTENT": "Tell your story...",
     "NAVIGATION_BACK_TITLE": "Back to overview"
   },
   "LOGIN": {

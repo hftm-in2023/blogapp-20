@@ -35,29 +35,32 @@
       </div>
       <button mat-list-item (click)="changeLanguage('de'); drawer.close()">
         <mat-icon matListItemIcon>translate</mat-icon>
-        Deutsch
+        {{ "SIDEBAR.DEUTSCH" | translate }}
       </button>
       <button mat-list-item (click)="changeLanguage('en'); drawer.close()">
         <mat-icon matListItemIcon>translate</mat-icon>
-        English
+        {{ "SIDEBAR.ENGLISH" | translate }}
       </button>
       <mat-divider></mat-divider>
       <button mat-list-item (click)="toggleTheme(); drawer.close()">
         <mat-icon matListItemIcon>{{
           isDarkMode() ? "light_mode" : "dark_mode"
         }}</mat-icon>
-        {{ isDarkMode() ? "Light Mode" : "Dark Mode" }}
+        {{
+          (isDarkMode() ? "SIDEBAR.LIGHT_MODE" : "SIDEBAR.DARK_MODE")
+            | translate
+        }}
       </button>
       <mat-divider></mat-divider>
       @if (isAuthenticated()) {
         <button mat-list-item (click)="logout.emit(); drawer.close()">
           <mat-icon matListItemIcon>logout</mat-icon>
-          Logout
+          {{ "SIDEBAR.LOGOUT" | translate }}
         </button>
       } @else {
         <button mat-list-item (click)="login.emit(); drawer.close()">
           <mat-icon matListItemIcon>login</mat-icon>
-          Login
+          {{ "SIDEBAR.LOGIN" | translate }}
         </button>
       }
     </mat-nav-list>
@@ -109,7 +112,7 @@
         <button
           class="nav-icon-btn"
           mat-icon-button
-          matTooltip="Toggle theme"
+          [matTooltip]="'SIDEBAR.TOGGLE_THEME' | translate"
           aria-label="Toggle light/dark theme"
           (click)="toggleTheme()"
         >
@@ -130,7 +133,7 @@
           data-testid="logout-button"
           class="nav-icon-btn"
           mat-icon-button
-          matTooltip="Logout"
+          [matTooltip]="'SIDEBAR.LOGOUT' | translate"
           aria-label="Logout button"
           (click)="logout.emit()"
         >
@@ -141,7 +144,7 @@
           data-testid="login-button"
           class="nav-icon-btn"
           mat-icon-button
-          matTooltip="Login"
+          [matTooltip]="'SIDEBAR.LOGIN' | translate"
           aria-label="Login button"
           (click)="login.emit()"
         >

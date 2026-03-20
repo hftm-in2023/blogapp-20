@@ -1,7 +1,11 @@
 <article class="article-page">
   <header class="article-header">
-    <span class="article-category editorial-label">Artikel</span>
-    <h1 class="article-title">Blog #{{ id() }}</h1>
+    <span class="article-category editorial-label"
+      >{{ "DETAIL.CATEGORY" | translate }}</span
+    >
+    <h1 class="article-title">
+      {{ "DETAIL.BLOG_TITLE" | translate: { value: id() } }}
+    </h1>
     <p class="article-subtitle">
       Eine Erkundung von Ideen, die unser Denken formen und die Art veraendern,
       wie wir die Welt sehen.

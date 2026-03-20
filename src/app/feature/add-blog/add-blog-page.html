@@ -1,6 +1,6 @@
 <div class="editor-page">
   <div class="editor-header">
-    <h1 class="editor-title">Neuen Beitrag verfassen</h1>
+    <h1 class="editor-title">{{ "ADD_BLOG.TITLE" | translate }}</h1>
     <div class="editor-actions-top">
       <button
         type="button"
@@ -8,7 +8,7 @@
         mat-button
         (click)="onReset()"
       >
-        Zuruecksetzen
+        {{ "ADD_BLOG.RESET" | translate }}
       </button>
       <button
         type="button"
@@ -17,25 +17,22 @@
         [disabled]="submitButtonDisabled()"
         (click)="onSubmit($event)"
       >
-        Veroeffentlichen
+        {{ "ADD_BLOG.PUBLISH" | translate }}
       </button>
     </div>
   </div>
 
   @if (state().error) {
-  <div class="error-banner">
-    Oups, der Blog konnte nicht gespeichert werden. Bitte versuchen Sie es
-    spaeter nochmals.
-  </div>
+  <div class="error-banner">{{ "ADD_BLOG.ERROR" | translate }}</div>
   }
 
   <form class="editor-form" (submit)="onSubmit($event)">
     <mat-form-field appearance="outline" class="editor-title-field">
-      <mat-label>Titel</mat-label>
+      <mat-label>{{ "ADD_BLOG.FIELD_TITLE" | translate }}</mat-label>
       <input
         matInput
         [formField]="blogForm.title"
-        placeholder="Geben Sie Ihrem Beitrag einen Titel..."
+        [placeholder]="'ADD_BLOG.FIELD_TITLE_PLACEHOLDER' | translate"
       />
       <mat-error>
         @for (error of blogForm.title().errors(); track error.kind) {
@@ -45,7 +42,7 @@
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="editor-content-field">
-      <mat-label>Erzaehlen Sie Ihre Geschichte...</mat-label>
+      <mat-label>{{ "ADD_BLOG.FIELD_CONTENT" | translate }}</mat-label>
       <textarea
         matInput
         rows="24"

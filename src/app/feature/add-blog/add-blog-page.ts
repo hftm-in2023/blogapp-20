@@ -18,13 +18,20 @@ import {
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { TranslatePipe } from '@ngx-translate/core';
 import { CreatedBlog } from './add-blog-backend';
 import { BlogStore } from './state';
 import { Dispatcher } from '../../core/events/dispatcher';
 
 @Component({
   selector: 'app-add-blog',
-  imports: [FormField, MatFormFieldModule, MatInputModule, MatButtonModule],
+  imports: [
+    FormField,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    TranslatePipe,
+  ],
   templateUrl: './add-blog-page.html',
   styleUrl: './add-blog-page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

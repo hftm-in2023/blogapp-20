@@ -1,9 +1,7 @@
 @if (model()) {
 <div class="overview-header">
-  <h1 class="overview-title">Entdecken</h1>
-  <p class="overview-subtitle">
-    Geschichten, Ideen und Perspektiven von unserer Community.
-  </p>
+  <h1 class="overview-title">{{ "OVERVIEW.TITLE" | translate }}</h1>
+  <p class="overview-subtitle">{{ "OVERVIEW.SUBTITLE" | translate }}</p>
 </div>
 <div class="blog-feed">
   @for (blog of model().data; track blog.id; let i = $index) {
