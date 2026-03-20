@@ -159,5 +159,17 @@
     <main class="editorial-content">
       <router-outlet></router-outlet>
     </main>
+
+    @if (isHandset() && canAddBlog()) {
+      <a
+        class="fab-create"
+        mat-fab
+        routerLink="/add-blog"
+        aria-label="Create new blog post"
+        color="primary"
+      >
+        <mat-icon>add</mat-icon>
+      </a>
+    }
   </mat-sidenav-content>
 </mat-sidenav-container>

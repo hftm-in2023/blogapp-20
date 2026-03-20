@@ -178,3 +178,11 @@
   min-height: calc(100vh - 64px);
   background: var(--mat-sys-surface);
 }
+
+// ── Mobile FAB ──
+.fab-create {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 99;
+}
