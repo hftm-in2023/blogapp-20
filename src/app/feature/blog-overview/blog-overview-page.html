@@ -5,7 +5,8 @@
 </div>
 <div class="blog-feed">
   @for (blog of model().data; track blog.id; let i = $index) {
-  <BlogCard
+  <app-blog-card
+    data-testid="blog-card"
     [model]="blog"
     [routeCommands]="['/detail/', blog.id]"
     (likeBlog)="likeBlog($event)"

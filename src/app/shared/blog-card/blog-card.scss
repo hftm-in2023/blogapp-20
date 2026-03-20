@@ -115,7 +115,7 @@
     height: 1.125rem;
 
     &.liked {
-      color: #e74c3c;
+      color: var(--mat-sys-error);
     }
   }
 }

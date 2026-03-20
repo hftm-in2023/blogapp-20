@@ -4,9 +4,10 @@ import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 import BlogOverviewPage from './blog-overview-page';
 import { Blog, BlogCard } from '../../shared/blog-card/blog-card';
-import { MockProvider } from '../../core/mock.spec';
+import { MockProvider } from '../../core/mock-provider';
 import { By } from '@angular/platform-browser';
 import { BlogBackend } from './blog-backend';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('BlogOverviewPage', () => {
   let component: BlogOverviewPage;
@@ -23,7 +24,7 @@ describe('BlogOverviewPage', () => {
         },
         MockProvider(BlogBackend),
       ],
-      imports: [BlogOverviewPage],
+      imports: [BlogOverviewPage, TranslateModule.forRoot()],
     })
       .overrideComponent(BlogCard, {
         set: { template: '<div>Mocked Component</div>' },
@@ -48,9 +49,11 @@ describe('BlogOverviewPage', () => {
       maxPageSize: 5,
     });
     fixture.detectChanges();
-    const likeBlogSpy = spyOn(component, 'likeBlog');
+    const likeBlogSpy = vi
+      .spyOn(component, 'likeBlog')
+      .mockImplementation(() => undefined);
     const blogOverviewComponent = fixture.debugElement.query(
-      By.css('BlogCard'),
+      By.css('[data-testid="blog-card"]'),
     );
     // act
     blogOverviewComponent.triggerEventHandler('likeBlog', {
@@ -72,7 +75,7 @@ describe('BlogOverviewPage', () => {
     fixture.detectChanges();
     // arrange -- act
     const blogOverviewComponents = fixture.debugElement.queryAll(
-      By.css('BlogCard'),
+      By.css('[data-testid="blog-card"]'),
     );
     // assert
     expect(blogOverviewComponents.length).toBe(2);

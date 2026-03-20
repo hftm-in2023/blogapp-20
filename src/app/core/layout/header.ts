@@ -12,7 +12,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'BlogHeader',
+  selector: 'app-blog-header',
   template: `
     <mat-toolbar color="primary" class="header-toolbar">
       <span>Blog App</span>

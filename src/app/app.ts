@@ -1,10 +1,10 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthStore } from './core/auth';
-import { SidebarComponent } from './core/layout/sidebar/sidebar.component';
+import { SidebarComponent } from './core/layout';
 
 @Component({
-  selector: 'App',
+  selector: 'app-root',
   imports: [SidebarComponent],
   templateUrl: './app.html',
   styleUrl: './app.scss',

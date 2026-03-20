@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'Error',
+  selector: 'app-error',
   template: `<h1>Oops! Something went wrong.</h1>`,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

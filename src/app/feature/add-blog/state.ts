@@ -1,7 +1,7 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { AddBlogBackend, CreatedBlog } from './add-blog-backend';
 import { Router } from '@angular/router';
-import { Dispatcher } from '../../core/events/dispatcher';
+import { Dispatcher } from '../../core/events';
 
 type BlogState = {
   error?: string;

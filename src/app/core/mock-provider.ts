@@ -1,12 +1,9 @@
 import { Type, Provider } from '@angular/core';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-declare const jasmine: any;
-
 /**
  * Automatically creates a mock provider for a given service class or injection token.
  *
- * - All methods become jasmine spies
+ * - All methods become vitest spies
  * - All properties become writable spy values
  */
 export function MockProvider<T>(token: Type<T> | unknown): Provider {
@@ -22,7 +19,7 @@ export function MockProvider<T>(token: Type<T> | unknown): Provider {
     const descriptor = Object.getOwnPropertyDescriptor(prototype, key);
     if (descriptor && typeof descriptor.value === 'function') {
       // method -> spy function
-      mock[key] = jasmine.createSpy(key);
+      mock[key] = vi.fn();
     } else {
       // property -> spy object
       mock[key] = undefined;

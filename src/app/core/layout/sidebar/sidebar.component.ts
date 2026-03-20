@@ -21,11 +21,11 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { MatProgressBar } from '@angular/material/progress-bar';
-import { RouterStore } from '../../state/router';
+import { RouterStore } from '../../state';
 import { ThemeStore } from '../../theme';
 
 @Component({
-  selector: 'Sidebar',
+  selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',
   imports: [

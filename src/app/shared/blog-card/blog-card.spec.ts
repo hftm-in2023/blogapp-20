@@ -12,7 +12,7 @@ describe('BlogCard', () => {
   let component: BlogCard;
   let fixture: ComponentFixture<BlogCard>;
   let routerMock: Router;
-  let navigateSpy: jasmine.Spy;
+  let navigateSpy: ReturnType<typeof vi.spyOn>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -63,7 +63,7 @@ describe('BlogCard', () => {
     const node: HTMLElement = fixture.debugElement.nativeElement.querySelector(
       '[data-testid="title"]',
     );
-    expect(node.innerText).toBe('A title');
+    expect(node.textContent).toBe('A title');
   });
   it('should show the like button without liked class when likedByMe is false', () => {
     // arrange
@@ -106,9 +106,9 @@ describe('BlogCard', () => {
       title: 'A title',
     } as Blog);
     fixture.detectChanges();
-    navigateSpy = spyOn(routerMock, 'navigateByUrl').and.returnValue(
-      Promise.resolve(true),
-    );
+    navigateSpy = vi
+      .spyOn(routerMock, 'navigateByUrl')
+      .mockReturnValue(Promise.resolve(true));
     // act
     const debugEl: HTMLElement = fixture.debugElement.query(
       By.css('[data-testid="title"]'),
@@ -117,6 +117,6 @@ describe('BlogCard', () => {
     // assert
 
     const urlTree: UrlTree = routerMock.createUrlTree(['/path', 1]);
-    expect(navigateSpy).toHaveBeenCalledWith(urlTree, jasmine.any(Object));
+    expect(navigateSpy).toHaveBeenCalledWith(urlTree, expect.any(Object));
   });
 });

@@ -5,7 +5,7 @@
 
     <section class="example-section">
       <label class="example-margin">Mode:</label>
-      <mat-radio-group [(ngModel)]="mode">
+      <mat-radio-group [formField]="demoForm.mode">
         <mat-radio-button class="example-margin" value="determinate">
           Determinate
         </mat-radio-button>
@@ -21,18 +21,18 @@
       </mat-radio-group>
     </section>
 
-    @if (mode() === "determinate" || mode() === "buffer") {
+    @if (demoModel().mode === "determinate" || demoModel().mode === "buffer") {
     <section class="example-section">
       <label class="example-margin">Progress:</label>
       <mat-slider class="example-margin">
-        <input type="range" [(ngModel)]="value" matSliderThumb />
+        <input type="range" [formField]="demoForm.value" matSliderThumb />
       </mat-slider>
     </section>
-    } @if (mode() === "buffer") {
+    } @if (demoModel().mode === "buffer") {
     <section class="example-section">
       <label class="example-margin">Buffer:</label>
       <mat-slider class="example-margin">
-        <input type="range" [(ngModel)]="bufferValue" matSliderThumb />
+        <input type="range" [formField]="demoForm.bufferValue" matSliderThumb />
       </mat-slider>
     </section>
     }
@@ -46,9 +46,9 @@
     <section class="example-section">
       <mat-progress-bar
         class="example-margin"
-        [mode]="mode()"
-        [value]="value()"
-        [bufferValue]="bufferValue"
+        [mode]="demoModel().mode"
+        [value]="demoModel().value"
+        [bufferValue]="demoModel().bufferValue"
       >
       </mat-progress-bar>
     </section>

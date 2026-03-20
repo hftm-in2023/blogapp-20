@@ -5,6 +5,7 @@ import {
   inject,
   resource,
   signal,
+  untracked,
 } from '@angular/core';
 import {
   form,
@@ -21,7 +22,7 @@ import { MatInputModule } from '@angular/material/input';
 import { TranslatePipe } from '@ngx-translate/core';
 import { CreatedBlog } from './add-blog-backend';
 import { BlogStore } from './state';
-import { Dispatcher } from '../../core/events/dispatcher';
+import { Dispatcher } from '../../core/events';
 
 @Component({
   selector: 'app-add-blog',
@@ -108,9 +109,11 @@ export default class AddBlogPage {
         'Form status changed:',
         isPending ? 'PENDING' : isValid ? 'VALID' : 'INVALID',
       );
-      this.#dispatcher.dispatch({
-        type: 'SET_LOADING_STATE',
-        payload: { isLoading: isPending },
+      untracked(() => {
+        this.#dispatcher.dispatch({
+          type: 'SET_LOADING_STATE',
+          payload: { isLoading: isPending },
+        });
       });
     });
   }

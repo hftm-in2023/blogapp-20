@@ -19,7 +19,7 @@ export type Blog = {
 };
 
 @Component({
-  selector: 'BlogCard',
+  selector: 'app-blog-card',
   templateUrl: './blog-card.html',
   styleUrls: ['./blog-card.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

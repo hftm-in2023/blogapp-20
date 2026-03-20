@@ -1,19 +1,19 @@
-import { Component, model } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import {
   ProgressBarMode,
   MatProgressBarModule,
 } from '@angular/material/progress-bar';
 import { MatSliderModule } from '@angular/material/slider';
-import { FormsModule } from '@angular/forms';
+import { form, FormField } from '@angular/forms/signals';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCardModule } from '@angular/material/card';
 
 @Component({
-  selector: 'Demo',
+  selector: 'app-demo',
   imports: [
     MatCardModule,
     MatRadioModule,
-    FormsModule,
+    FormField,
     MatSliderModule,
     MatProgressBarModule,
   ],
@@ -21,7 +21,15 @@ import { MatCardModule } from '@angular/material/card';
   styleUrl: './demo.scss',
 })
 export default class Demo {
-  protected readonly mode = model<ProgressBarMode>('determinate');
-  protected readonly value = model<number>();
-  protected readonly bufferValue = 75;
+  protected readonly demoModel = signal<{
+    mode: ProgressBarMode;
+    value: number;
+    bufferValue: number;
+  }>({
+    mode: 'determinate',
+    value: 0,
+    bufferValue: 75,
+  });
+
+  protected readonly demoForm = form(this.demoModel);
 }
