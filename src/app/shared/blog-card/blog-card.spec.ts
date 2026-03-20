@@ -40,6 +40,7 @@ describe('BlogCard', () => {
       author: 'a author',
       likedByMe: false,
       title: 'A title',
+      createdAt: '2025-01-15T10:00:00Z',
     } as Blog);
 
     // act
@@ -56,6 +57,7 @@ describe('BlogCard', () => {
       author: 'a author',
       likedByMe: false,
       title: 'A title',
+      createdAt: '2025-01-15T10:00:00Z',
     } as Blog);
     // act
     fixture.detectChanges();
@@ -72,6 +74,7 @@ describe('BlogCard', () => {
       author: 'a author',
       likedByMe: false,
       title: 'A title',
+      createdAt: '2025-01-15T10:00:00Z',
     } as Blog);
     // act
     fixture.detectChanges();
@@ -88,6 +91,7 @@ describe('BlogCard', () => {
       author: 'a author',
       likedByMe: true,
       title: 'A title',
+      createdAt: '2025-01-15T10:00:00Z',
     } as Blog);
     // act
     fixture.detectChanges();
@@ -104,6 +108,7 @@ describe('BlogCard', () => {
       author: 'a author',
       likedByMe: false,
       title: 'A title',
+      createdAt: '2025-01-15T10:00:00Z',
     } as Blog);
     fixture.detectChanges();
     navigateSpy = vi

@@ -18,7 +18,8 @@
   },
   "DETAIL": {
     "CATEGORY": "Article",
-    "BLOG_TITLE": "Blog #{{ value }}"
+    "PUBLISHED_ON": "Published on {{ value }}",
+    "BACK_TO_OVERVIEW": "Back to overview"
   },
   "ADD_BLOG": {
     "TITLE": "Write a new post",
@@ -29,6 +30,14 @@
     "FIELD_TITLE_PLACEHOLDER": "Give your post a title...",
     "FIELD_CONTENT": "Tell your story...",
     "NAVIGATION_BACK_TITLE": "Back to overview"
+  },
+  "FOOTER": {
+    "COPYRIGHT": "© 2024 The Record Editorial. All rights reserved.",
+    "ABOUT": "About",
+    "PRIVACY": "Privacy Policy",
+    "TERMS": "Terms of Service",
+    "ARCHIVE": "Archive",
+    "CAREERS": "Careers"
   },
   "LOGIN": {
     "TITLE": "Sign in to continue",

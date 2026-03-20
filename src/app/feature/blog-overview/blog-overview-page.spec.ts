@@ -51,7 +51,7 @@ describe('BlogOverviewPage', () => {
     fixture.detectChanges();
     const likeBlogSpy = vi
       .spyOn(component, 'likeBlog')
-      .mockImplementation(() => undefined);
+      .mockImplementation(() => Promise.resolve());
     const blogOverviewComponent = fixture.debugElement.query(
       By.css('[data-testid="blog-card"]'),
     );

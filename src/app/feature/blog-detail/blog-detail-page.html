@@ -3,19 +3,16 @@
     <span class="article-category editorial-label"
       >{{ "DETAIL.CATEGORY" | translate }}</span
     >
-    <h1 class="article-title">
-      {{ "DETAIL.BLOG_TITLE" | translate: { value: id() } }}
-    </h1>
-    <p class="article-subtitle">
-      Eine Erkundung von Ideen, die unser Denken formen und die Art veraendern,
-      wie wir die Welt sehen.
-    </p>
+    <h1 class="article-title">{{ model().title }}</h1>
     <div class="article-meta">
       <div class="author-info">
-        <div class="author-avatar">A</div>
+        <div class="author-avatar">{{ initials() }}</div>
         <div class="author-details">
-          <span class="author-name">Autor</span>
-          <span class="article-date">Veroeffentlicht am 19. Maerz 2026</span>
+          <span class="author-name">{{ model().author }}</span>
+          <span class="article-date"
+            >{{ "DETAIL.PUBLISHED_ON" | translate: { value: formattedDate() }
+            }}</span
+          >
         </div>
       </div>
     </div>
@@ -24,21 +21,16 @@
   <div class="article-hero">
     <img
       class="hero-image"
-      src="https://picsum.photos/seed/{{ id() }}/1200/600"
+      [src]="model().headerImageUrl ?? 'https://picsum.photos/seed/' + model().id + '/1200/600'"
       alt="Article hero image"
     />
   </div>
 
   <div class="article-body editorial-body">
-    <p>
-      Der Inhalt dieses Blog-Beitrags wird hier angezeigt. Dies ist ein
-      Platzhaltertext, der die redaktionelle Typografie und das Layout des
-      Lesebereichs demonstriert.
-    </p>
-    <p>
-      In der endgueltigen Implementierung wuerde dieser Bereich den
-      vollstaendigen Artikelinhalt enthalten, mit angemessener
-      Absatzformatierung, Ueberschriften und allen eingebetteten Medien.
-    </p>
+    <p>{{ model().content }}</p>
   </div>
+
+  <a class="back-link" [routerLink]="['/overview']"
+    >{{ "DETAIL.BACK_TO_OVERVIEW" | translate }}</a
+  >
 </article>

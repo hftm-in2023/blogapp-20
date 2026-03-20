@@ -23,6 +23,7 @@ import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { MatProgressBar } from '@angular/material/progress-bar';
 import { RouterStore } from '../../state';
 import { ThemeStore } from '../../theme';
+import { FooterComponent } from '../footer/footer';
 
 @Component({
   selector: 'app-sidebar',
@@ -40,6 +41,7 @@ import { ThemeStore } from '../../theme';
     TranslatePipe,
     MatProgressBar,
     MatDivider,
+    FooterComponent,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -1,7 +1,10 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
+  inject,
   input,
+  LOCALE_ID,
   output,
 } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
@@ -11,6 +14,7 @@ export type Blog = {
   author: string;
   comments: number;
   contentPreview: string;
+  createdAt: string;
   createdByMe: boolean;
   id: number;
   likedByMe: boolean;
@@ -26,8 +30,24 @@ export type Blog = {
   imports: [RouterLink, MatIconModule],
 })
 export class BlogCard {
+  readonly #locale = inject(LOCALE_ID);
+
   readonly model = input.required<Blog>();
   readonly routeCommands = input.required<[string, number]>();
+
+  readonly initials = computed(() => {
+    const parts = this.model().author.split(' ');
+    return parts.map((p) => p[0]?.toUpperCase() ?? '').join('');
+  });
+
+  readonly formattedDate = computed(() => {
+    const date = new Date(this.model().createdAt);
+    return new Intl.DateTimeFormat(this.#locale, {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+    }).format(date);
+  });
 
   likeBlog = output<{
     id: number;

@@ -13,7 +13,7 @@ export function handlePreflight(request: HttpRequest): HttpResponseInit | null {
     status: 204,
     headers: {
       ...corsHeaders,
-      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, OPTIONS',
       'Access-Control-Allow-Headers': 'Content-Type, X-Requested-With',
       'Access-Control-Max-Age': '86400',
     },

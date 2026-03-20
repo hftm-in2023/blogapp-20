@@ -4,7 +4,7 @@
   <p class="overview-subtitle">{{ "OVERVIEW.SUBTITLE" | translate }}</p>
 </div>
 <div class="blog-feed">
-  @for (blog of model().data; track blog.id; let i = $index) {
+  @for (blog of entries(); track blog.id; let i = $index) {
   <app-blog-card
     data-testid="blog-card"
     [model]="blog"

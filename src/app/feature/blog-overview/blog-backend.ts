@@ -1,5 +1,6 @@
-import { httpResource } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { HttpClient, httpResource } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
+import { lastValueFrom } from 'rxjs';
 import { z } from 'zod';
 import { environment } from '../../../environments/environment';
 
@@ -13,6 +14,7 @@ const BlogSchema = z.object({
   likedByMe: z.boolean(),
   createdByMe: z.boolean(),
   headerImageUrl: z.string().optional(),
+  createdAt: z.string(),
 });
 
 const BlogArraySchema = z.array(BlogSchema);
@@ -33,10 +35,20 @@ export type Entries = z.infer<typeof EntriesSchema>;
   providedIn: 'root',
 })
 export class BlogBackend {
+  readonly #http = inject(HttpClient);
+
   readonly entries = httpResource<Entries>(
     () => `${environment.bffUrl}/entries`,
     {
       parse: (data) => EntriesSchema.parse(data),
     },
   );
+
+  likeEntry(id: number, likedByMe: boolean): Promise<void> {
+    return lastValueFrom(
+      this.#http.put<void>(`${environment.bffUrl}/entries/${id}/like`, {
+        likedByMe,
+      }),
+    );
+  }
 }

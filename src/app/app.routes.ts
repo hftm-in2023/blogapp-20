@@ -25,7 +25,7 @@ export const APP_ROUTES: Routes = [
   },
   {
     path: 'detail/:id',
-    loadComponent: () => import('./feature/blog-detail/blog-detail-page'),
+    loadChildren: () => import('./feature/blog-detail/blog-detail-route'),
   },
   {
     path: 'add-blog',
