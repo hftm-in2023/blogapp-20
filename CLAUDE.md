@@ -21,7 +21,7 @@ Angular 21 blog application with a Backend-for-Frontend (BFF) pattern using Azur
 
 - **Frontend**: Angular 21 with standalone components, signals, and zoneless change detection
 - **BFF**: Azure Functions v4 (TypeScript, ESM) in `bff/` directory
-- **Auth**: BFF pattern — session cookies via `@hapi/iron`, Keycloak as identity provider
+- **Auth**: BFF pattern — password grant via Keycloak, encrypted session cookies (`@hapi/iron`), CSRF protection (`X-Requested-With` header), no Authorization Code flow / no PKCE
 - **State**: Signal-based stores (`signal()` + `computed()`) — no NgRx
 - **Routing**: Lazy-loaded features with `canMatch` guards
 - **i18n**: ngx-translate with JSON files in `public/i18n/`
@@ -36,9 +36,31 @@ src/app/
   feature/       # Domain features (blog-overview, blog-detail, add-blog, login, demo)
   shared/        # Reusable components (blog-card)
 bff/src/
-  functions/     # Azure Function endpoints (auth-login, auth-logout, auth-me, proxy-entries)
+  functions/     # Azure Function endpoints (auth-login, auth-logout, auth-me, auth-refresh, proxy-entries)
   lib/           # Shared BFF logic (session, keycloak, cors, csrf, proxy)
 ```
+
+## Authentication
+
+The app uses a **BFF (Backend-for-Frontend)** auth pattern. The frontend never handles tokens directly.
+
+**Flow**: User submits username/password → BFF exchanges credentials with Keycloak (password grant) → BFF encrypts tokens into an HttpOnly `__session` cookie → frontend uses cookie automatically.
+
+**BFF endpoints**:
+
+| Endpoint             | Method | Purpose                          | CSRF |
+| -------------------- | ------ | -------------------------------- | ---- |
+| `/api/auth/login`    | POST   | Username/password authentication | Yes  |
+| `/api/auth/logout`   | POST   | Revoke token & clear session     | Yes  |
+| `/api/auth/me`       | GET    | Return current user from session | No   |
+| `/api/auth/refresh`  | POST   | Refresh expired access token     | Yes  |
+
+**Security**:
+- Tokens stored in `@hapi/iron` encrypted, HttpOnly, Secure, SameSite=Lax cookie
+- CSRF protection via `X-Requested-With: XMLHttpRequest` header (added by `cookieInterceptor`)
+- Role-based route protection via `authGuard` (`canMatch`)
+
+**BFF environment variables**: `SESSION_SECRET`, `KEYCLOAK_URL`, `KEYCLOAK_CLIENT_ID`, `KEYCLOAK_CLIENT_SECRET`, `ALLOWED_ORIGIN`
 
 ## Code Conventions
 
