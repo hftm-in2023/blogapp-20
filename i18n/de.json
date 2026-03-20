@@ -18,7 +18,8 @@
   },
   "DETAIL": {
     "CATEGORY": "Artikel",
-    "BLOG_TITLE": "Blog #{{ value }}"
+    "PUBLISHED_ON": "Veröffentlicht am {{ value }}",
+    "BACK_TO_OVERVIEW": "Zurück zur Übersicht"
   },
   "ADD_BLOG": {
     "TITLE": "Neuen Beitrag verfassen",
@@ -29,6 +30,14 @@
     "FIELD_TITLE_PLACEHOLDER": "Geben Sie Ihrem Beitrag einen Titel...",
     "FIELD_CONTENT": "Erzählen Sie Ihre Geschichte...",
     "NAVIGATION_BACK_TITLE": "Zurück zur Übersicht"
+  },
+  "FOOTER": {
+    "COPYRIGHT": "© 2024 The Record Editorial. Alle Rechte vorbehalten.",
+    "ABOUT": "Über uns",
+    "PRIVACY": "Datenschutz",
+    "TERMS": "Nutzungsbedingungen",
+    "ARCHIVE": "Archiv",
+    "CAREERS": "Karriere"
   },
   "LOGIN": {
     "TITLE": "Anmelden um fortzufahren",
