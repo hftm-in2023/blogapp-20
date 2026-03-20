@@ -34,9 +34,11 @@
         {{ "SIDEBAR.LANGUAGE" | translate }}
       </div>
       <button mat-list-item (click)="changeLanguage('de'); drawer.close()">
+        <mat-icon matListItemIcon>translate</mat-icon>
         Deutsch
       </button>
       <button mat-list-item (click)="changeLanguage('en'); drawer.close()">
+        <mat-icon matListItemIcon>translate</mat-icon>
         English
       </button>
       <mat-divider></mat-divider>
