@@ -2,11 +2,32 @@
   "SIDEBAR": {
     "CREATE_NEW_BLOG_BUTTON": "Schreiben",
     "LOGGEDIN_USER": "Sie sind eingeloggt als {{ value }}",
-    "SEARCH_PLACEHOLDER": "Suche",
     "HOME": "Startseite",
-    "LANGUAGE": "Sprache"
+    "LANGUAGE": "Sprache",
+    "DEUTSCH": "Deutsch",
+    "ENGLISH": "English",
+    "LIGHT_MODE": "Heller Modus",
+    "DARK_MODE": "Dunkler Modus",
+    "LOGOUT": "Abmelden",
+    "LOGIN": "Anmelden",
+    "TOGGLE_THEME": "Design wechseln"
   },
-  "ADD_BLOG_PAGE": {
+  "OVERVIEW": {
+    "TITLE": "Entdecken",
+    "SUBTITLE": "Geschichten, Ideen und Perspektiven von unserer Community."
+  },
+  "DETAIL": {
+    "CATEGORY": "Artikel",
+    "BLOG_TITLE": "Blog #{{ value }}"
+  },
+  "ADD_BLOG": {
+    "TITLE": "Neuen Beitrag verfassen",
+    "RESET": "Zurücksetzen",
+    "PUBLISH": "Veröffentlichen",
+    "ERROR": "Oups, der Blog konnte nicht gespeichert werden. Bitte versuchen Sie es später nochmals.",
+    "FIELD_TITLE": "Titel",
+    "FIELD_TITLE_PLACEHOLDER": "Geben Sie Ihrem Beitrag einen Titel...",
+    "FIELD_CONTENT": "Erzählen Sie Ihre Geschichte...",
     "NAVIGATION_BACK_TITLE": "Zurück zur Übersicht"
   },
   "LOGIN": {
