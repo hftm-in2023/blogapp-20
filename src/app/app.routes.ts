@@ -21,7 +21,6 @@ export const APP_ROUTES: Routes = [
   {
     path: 'overview',
     loadChildren: () => import('./feature/blog-overview/blog-overview-route'),
-    runGuardsAndResolvers: 'always',
   },
   {
     path: 'detail/:id',

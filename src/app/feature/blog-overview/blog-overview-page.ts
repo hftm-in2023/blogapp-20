@@ -38,17 +38,35 @@ type Model = {
 })
 export default class BlogOverviewPage {
   readonly #blogBackend = inject(BlogBackend);
+
   protected readonly model = input.required<Model>();
+  protected readonly tab = input<string>('home');
+  protected readonly search = input<string>('');
+
   readonly #overrides = signal<
     Map<number, { likedByMe: boolean; likes: number }>
   >(new Map());
 
   protected readonly entries = computed(() => {
     const overrides = this.#overrides();
-    return this.model().data.map((entry) => {
+    const currentTab = this.tab();
+
+    let filtered = this.model().data.map((entry) => {
       const override = overrides.get(entry.id);
       return override ? { ...entry, ...override } : entry;
     });
+
+    if (currentTab === 'trending') {
+      const thirtyDaysAgo = new Date();
+      thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+      filtered = filtered
+        .filter((e) => new Date(e.createdAt) >= thirtyDaysAgo)
+        .sort((a, b) => b.likes - a.likes);
+    } else if (currentTab === 'liked') {
+      filtered = filtered.filter((e) => e.likedByMe);
+    }
+
+    return filtered;
   });
 
   async likeBlog($event: { id: number; likedByMe: boolean }) {

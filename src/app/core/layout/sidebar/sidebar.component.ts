@@ -2,35 +2,35 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
-  DestroyRef,
+  effect,
   inject,
   input,
   output,
   signal,
-  Signal,
+  untracked,
   viewChild,
 } from '@angular/core';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { Breakpoints } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavContent, MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDivider } from '@angular/material/divider';
-import { filter, map, shareReplay } from 'rxjs/operators';
-import {
-  NavigationEnd,
-  Router,
-  RouterLink,
-  RouterOutlet,
-} from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { MatProgressBar } from '@angular/material/progress-bar';
 import { RouterStore } from '../../state';
 import { ThemeStore } from '../../theme';
 import { FooterComponent } from '../footer/footer';
+import { NavigationEnd } from '@angular/router';
+import {
+  breakpointSignal,
+  debouncedEffect,
+  onNavigation,
+  queryParamSignal,
+} from '../../utils';
 
 @Component({
   selector: 'app-sidebar',
@@ -53,11 +53,9 @@ import { FooterComponent } from '../footer/footer';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SidebarComponent {
-  readonly #breakpointObserver = inject(BreakpointObserver);
   readonly #translate = inject(TranslateService);
   readonly #themeStore = inject(ThemeStore);
   readonly #router = inject(Router);
-  readonly #destroyRef = inject(DestroyRef);
   protected readonly isLoading = inject(RouterStore).isLoading;
   protected readonly isDarkMode = this.#themeStore.isDarkMode;
   protected readonly currentLang = signal(
@@ -65,17 +63,29 @@ export class SidebarComponent {
   );
   private readonly sidenavContent = viewChild(MatSidenavContent);
 
+  readonly #searchText = signal('');
+  protected readonly searchText = this.#searchText.asReadonly();
+  readonly #routerSearch = queryParamSignal('search', '');
+
+  protected readonly activeTab = queryParamSignal('tab', 'home');
+
   constructor() {
-    this.#router.events
-      .pipe(
-        filter((event) => event instanceof NavigationEnd),
-        takeUntilDestroyed(this.#destroyRef),
-      )
-      .subscribe(() => {
-        this.sidenavContent()
-          ?.getElementRef()
-          .nativeElement.scrollTo({ top: 0 });
-      });
+    onNavigation(NavigationEnd, () => {
+      this.sidenavContent()?.getElementRef().nativeElement.scrollTo({ top: 0 });
+    });
+
+    effect(() => {
+      const search = this.#routerSearch();
+      untracked(() => this.#searchText.set(search));
+    });
+
+    debouncedEffect(
+      this.#searchText,
+      (value) => {
+        this.#navigateOverview(this.activeTab(), value);
+      },
+      500,
+    );
   }
 
   isAuthenticated = input.required<boolean>();
@@ -100,13 +110,7 @@ export class SidebarComponent {
     return authenticated && roles?.includes('user');
   });
 
-  isHandset = toSignal(
-    this.#breakpointObserver.observe(Breakpoints.Handset).pipe(
-      map((result) => result.matches),
-      shareReplay(),
-    ),
-    { initialValue: false },
-  ) as Signal<boolean>;
+  isHandset = breakpointSignal(Breakpoints.Handset);
 
   changeLanguage(language: string) {
     this.#translate.use(language);
@@ -115,5 +119,23 @@ export class SidebarComponent {
 
   toggleTheme() {
     this.#themeStore.toggleTheme();
+  }
+
+  protected onSearchInput(value: string): void {
+    this.#searchText.set(value);
+  }
+
+  protected onDrawerSearch(value: string): void {
+    this.#navigateOverview(this.activeTab(), value);
+  }
+
+  #navigateOverview(tab: string | undefined, search: string): void {
+    const queryParams: Record<string, string | null> = {};
+    queryParams['tab'] = tab === 'home' || !tab ? null : tab;
+    queryParams['search'] = search || null;
+    this.#router.navigate(['/overview'], {
+      queryParams,
+      queryParamsHandling: 'merge',
+    });
   }
 }

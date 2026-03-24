@@ -3,14 +3,23 @@
   <h1 class="overview-title">{{ "OVERVIEW.TITLE" | translate }}</h1>
   <p class="overview-subtitle">{{ "OVERVIEW.SUBTITLE" | translate }}</p>
 </div>
+
 <div class="blog-feed">
-  @for (blog of entries(); track blog.id; let i = $index) {
+  @for (blog of entries(); track blog.id) {
   <app-blog-card
     data-testid="blog-card"
     [model]="blog"
     [routeCommands]="['/detail/', blog.id]"
     (likeBlog)="likeBlog($event)"
   />
-  }
+  } @empty { @if (tab() === 'liked') {
+  <p class="empty-message" data-testid="empty-message">
+    {{ "OVERVIEW.NO_RESULTS_LIKED" | translate }}
+  </p>
+  } @else {
+  <p class="empty-message" data-testid="empty-message">
+    {{ "OVERVIEW.NO_RESULTS" | translate }}
+  </p>
+  } }
 </div>
 }

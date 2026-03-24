@@ -14,7 +14,7 @@ type ProxyResult = {
   status: number;
   body: unknown;
   headers: Record<string, string>;
-}
+};
 
 export async function proxyToBackend(
   request: HttpRequest,
@@ -75,7 +75,11 @@ export async function proxyToBackend(
     }
   }
 
-  const backendRes = await fetch(`${BLOG_BACKEND_URL}${path}`, fetchOptions);
+  const queryString = request.query.toString();
+  const url = queryString
+    ? `${BLOG_BACKEND_URL}${path}?${queryString}`
+    : `${BLOG_BACKEND_URL}${path}`;
+  const backendRes = await fetch(url, fetchOptions);
   const responseBody = await backendRes.json().catch(() => null);
 
   return {

@@ -1,4 +1,4 @@
-import { HttpClient, httpResource } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
 import { z } from 'zod';
@@ -37,12 +37,13 @@ export type Entries = z.infer<typeof EntriesSchema>;
 export class BlogBackend {
   readonly #http = inject(HttpClient);
 
-  readonly entries = httpResource<Entries>(
-    () => `${environment.bffUrl}/entries`,
-    {
-      parse: (data) => EntriesSchema.parse(data),
-    },
-  );
+  fetchEntries(searchstring?: string): Promise<Entries> {
+    const params: Record<string, string> = {};
+    if (searchstring) params['searchstring'] = searchstring;
+    return lastValueFrom(
+      this.#http.get(`${environment.bffUrl}/entries`, { params }),
+    ).then((data) => EntriesSchema.parse(data));
+  }
 
   likeEntry(id: number, likedByMe: boolean): Promise<void> {
     return lastValueFrom(

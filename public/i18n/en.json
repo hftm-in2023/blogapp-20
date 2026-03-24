@@ -10,11 +10,21 @@
     "DARK_MODE": "Dark Mode",
     "LOGOUT": "Logout",
     "LOGIN": "Login",
-    "TOGGLE_THEME": "Toggle theme"
+    "TOGGLE_THEME": "Toggle theme",
+    "TRENDING": "Trending",
+    "LIKED": "Liked",
+    "SEARCH": "Search",
+    "SEARCH_PLACEHOLDER": "Search posts..."
   },
   "OVERVIEW": {
     "TITLE": "Discover",
-    "SUBTITLE": "Stories, ideas, and perspectives from our community."
+    "SUBTITLE": "Stories, ideas, and perspectives from our community.",
+    "TAB_HOME": "Home",
+    "TAB_TRENDING": "Trending",
+    "TAB_LIKED": "Liked",
+    "SEARCH_PLACEHOLDER": "Search posts...",
+    "NO_RESULTS": "No posts found.",
+    "NO_RESULTS_LIKED": "You must log in and like a blog to see any content here."
   },
   "DETAIL": {
     "CATEGORY": "Article",

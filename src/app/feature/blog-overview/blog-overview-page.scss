@@ -27,6 +27,15 @@
   line-height: 1.5;
 }
 
+.empty-message {
+  text-align: center;
+  color: var(--mat-sys-on-surface-variant);
+  font-family: var(--editorial-sans);
+  font-size: 1rem;
+  padding: 3rem 1rem;
+  width: 100%;
+}
+
 .blog-feed {
   display: flex;
   flex-flow: row wrap;
