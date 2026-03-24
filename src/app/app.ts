@@ -26,9 +26,8 @@ export class App {
     this.#router.navigate(['/login']);
   }
 
-  logout() {
-    this.#authStore.logout().then(() => {
-      this.#router.navigate(['/']);
-    });
+  async logout() {
+    await this.#authStore.logout();
+    this.#router.navigate(['/']);
   }
 }

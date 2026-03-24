@@ -16,6 +16,7 @@ export type Blog = {
   contentPreview: string;
   createdAt: string;
   createdByMe: boolean;
+  headerImageUrl?: string;
   id: number;
   likedByMe: boolean;
   likes: number;

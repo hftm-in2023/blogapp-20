@@ -41,6 +41,39 @@
       </mat-error>
     </mat-form-field>
 
+    <div class="editor-image-upload">
+      <input
+        #fileInput
+        type="file"
+        accept="image/*"
+        hidden
+        (change)="onImageSelected($event)"
+      />
+      @if (imagePreview()) {
+      <div class="editor-image-preview">
+        <img [src]="imagePreview()" alt="Header image preview" />
+        <button
+          type="button"
+          mat-icon-button
+          class="editor-image-remove"
+          (click)="removeImage(); fileInput.value = ''"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+      } @else {
+      <button
+        type="button"
+        mat-stroked-button
+        class="editor-image-btn"
+        (click)="fileInput.click()"
+      >
+        <mat-icon>add_photo_alternate</mat-icon>
+        {{ "ADD_BLOG.ADD_IMAGE" | translate }}
+      </button>
+      }
+    </div>
+
     <mat-form-field appearance="outline" class="editor-content-field">
       <mat-label>{{ "ADD_BLOG.FIELD_CONTENT" | translate }}</mat-label>
       <textarea

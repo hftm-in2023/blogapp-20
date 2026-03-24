@@ -149,6 +149,7 @@ bff/src/
 - **Simplicity first** — write the simplest code a human can understand at a glance. Favor clarity over cleverness.
 - **Clean Code principles** — meaningful names, small focused functions, single responsibility, no dead code, no unnecessary abstractions
 - **Reactive/declarative over imperative** — prefer declarative expressions (signal `computed()`, RxJS pipelines, array methods like `map`/`filter`) over imperative control flow (`for` loops, manual state mutations, step-by-step procedural logic)
+- **async/await over promise chains** — always use `async`/`await` instead of `.then()` chains, except when using `Promise.all()` for parallel loading
 
 ## Code Conventions
 

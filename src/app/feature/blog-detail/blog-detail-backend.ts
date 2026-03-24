@@ -32,9 +32,10 @@ export type BlogDetail = z.infer<typeof BlogDetailSchema>;
 export class BlogDetailBackend {
   readonly #httpClient = inject(HttpClient);
 
-  getEntry(id: number): Promise<BlogDetail> {
-    return lastValueFrom(
+  async getEntry(id: number): Promise<BlogDetail> {
+    const data = await lastValueFrom(
       this.#httpClient.get(`${environment.bffUrl}/entries/${id}`),
-    ).then((data) => BlogDetailSchema.parse(data));
+    );
+    return BlogDetailSchema.parse(data);
   }
 }

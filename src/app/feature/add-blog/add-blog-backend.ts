@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 const CreatedBlogSchema = z.object({
   title: z.string(),
   content: z.string(),
+  headerImageUrl: z.string().optional(),
 });
 
 export type CreatedBlog = z.infer<typeof CreatedBlogSchema>;

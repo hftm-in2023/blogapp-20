@@ -37,12 +37,13 @@ export type Entries = z.infer<typeof EntriesSchema>;
 export class BlogBackend {
   readonly #http = inject(HttpClient);
 
-  fetchEntries(searchstring?: string): Promise<Entries> {
+  async fetchEntries(searchstring?: string): Promise<Entries> {
     const params: Record<string, string> = {};
     if (searchstring) params['searchstring'] = searchstring;
-    return lastValueFrom(
+    const data = await lastValueFrom(
       this.#http.get(`${environment.bffUrl}/entries`, { params }),
-    ).then((data) => EntriesSchema.parse(data));
+    );
+    return EntriesSchema.parse(data);
   }
 
   likeEntry(id: number, likedByMe: boolean): Promise<void> {

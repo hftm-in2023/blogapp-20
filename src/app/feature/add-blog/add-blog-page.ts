@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   effect,
   inject,
   resource,
@@ -18,6 +19,7 @@ import {
 } from '@angular/forms/signals';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { TranslatePipe } from '@ngx-translate/core';
 import { CreatedBlog } from './add-blog-backend';
@@ -31,6 +33,7 @@ import { Dispatcher } from '../../core/events';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    MatIconModule,
     TranslatePipe,
   ],
   templateUrl: './add-blog-page.html',
@@ -46,10 +49,19 @@ export default class AddBlogPage {
   protected readonly state = this.#blogStateService.state;
 
   // Form model signal (single source of truth)
-  protected readonly blogModel = signal<{ title: string; content: string }>({
+  protected readonly blogModel = signal<{
+    title: string;
+    content: string;
+    headerImageUrl: string;
+  }>({
     title: 'an exiting title',
     content: '',
+    headerImageUrl: '',
   });
+
+  protected readonly imagePreview = computed(
+    () => this.blogModel().headerImageUrl,
+  );
 
   // Signal form with schema-based validation
   protected readonly blogForm = form(this.blogModel, (s) => {
@@ -129,7 +141,28 @@ export default class AddBlogPage {
   }
 
   onReset() {
-    this.blogModel.set({ title: 'an exiting title', content: '' });
+    this.blogModel.set({
+      title: 'an exiting title',
+      content: '',
+      headerImageUrl: '',
+    });
     this.blogForm().reset();
+  }
+
+  protected onImageSelected(event: Event): void {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.blogModel.update((m) => ({
+        ...m,
+        headerImageUrl: reader.result as string,
+      }));
+    };
+    reader.readAsDataURL(file);
+  }
+
+  protected removeImage(): void {
+    this.blogModel.update((m) => ({ ...m, headerImageUrl: '' }));
   }
 }

@@ -69,6 +69,36 @@
   }
 }
 
+.editor-image-upload {
+  margin-bottom: 0.5rem;
+}
+
+.editor-image-preview {
+  position: relative;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  margin-bottom: 1rem;
+
+  img {
+    width: 100%;
+    display: block;
+    aspect-ratio: 8 / 5;
+    object-fit: cover;
+  }
+}
+
+.editor-image-remove {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: rgba(0, 0, 0, 0.5) !important;
+  color: white !important;
+}
+
+.editor-image-btn {
+  font-family: var(--editorial-sans);
+}
+
 .editor-content-field {
   width: 100%;
 }

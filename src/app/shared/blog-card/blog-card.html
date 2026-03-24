@@ -2,7 +2,7 @@
   <div class="card-image-wrapper">
     <img
       class="card-image"
-      [src]="'https://picsum.photos/seed/' + model().id + '/600/400'"
+      [src]="model().headerImageUrl || 'https://picsum.photos/seed/' + model().id + '/600/400'"
       alt="Article cover"
       loading="lazy"
     />
