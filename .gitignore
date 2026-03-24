@@ -46,3 +46,4 @@ bff/dist
 .DS_Store
 Thumbs.db
 .eslintcache
+test-results/.last-run.json

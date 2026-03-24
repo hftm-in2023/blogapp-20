@@ -12,6 +12,16 @@
     background: none;
     text-align: start;
   }
+
+  a[mat-list-item] {
+    border-radius: 0;
+
+    &[activated] {
+      background: var(--mat-sys-surface-container-high);
+      --mat-list-list-item-leading-icon-color: var(--mat-sys-on-surface);
+      --mat-list-list-item-label-text-color: var(--mat-sys-on-surface);
+    }
+  }
 }
 
 .sidenav-header {
