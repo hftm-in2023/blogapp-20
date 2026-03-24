@@ -104,6 +104,124 @@
   }
 }
 
+// ── Comments ──
+.responses-section {
+  border-top: 1px solid var(--mat-sys-outline-variant);
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+}
+
+.responses-header {
+  font-family: var(--editorial-sans);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--mat-sys-on-surface);
+  margin: 0 0 1.5rem;
+}
+
+.comment-input {
+  border: 1px solid var(--mat-sys-outline-variant);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-bottom: 2rem;
+}
+
+.comment-textarea {
+  width: 100%;
+  border: none;
+  outline: none;
+  resize: vertical;
+  font-family: var(--editorial-serif);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--mat-sys-on-surface);
+  background: transparent;
+  min-height: 4rem;
+  box-sizing: border-box;
+
+  &::placeholder {
+    color: var(--mat-sys-on-surface-variant);
+  }
+}
+
+.comment-input-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.75rem;
+}
+
+.comment-publish-btn {
+  font-family: var(--editorial-sans);
+  font-weight: 600;
+}
+
+.comment-item {
+  display: flex;
+  gap: 0.75rem;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--mat-sys-outline-variant);
+
+  &:first-of-type {
+    border-top: 1px solid var(--mat-sys-outline-variant);
+  }
+}
+
+.comment-avatar {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: var(--mat-sys-surface-container-highest);
+  color: var(--mat-sys-on-surface);
+  font-family: var(--editorial-sans);
+  font-weight: 600;
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.comment-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.comment-meta {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.comment-author {
+  font-family: var(--editorial-sans);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--mat-sys-on-surface);
+}
+
+.comment-date {
+  font-family: var(--editorial-sans);
+  font-size: 0.8125rem;
+  color: var(--mat-sys-on-surface-variant);
+}
+
+.comment-content {
+  font-family: var(--editorial-serif);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--mat-sys-on-surface);
+  margin: 0;
+}
+
+.no-comments {
+  font-family: var(--editorial-sans);
+  font-size: 0.9375rem;
+  color: var(--mat-sys-on-surface-variant);
+  text-align: center;
+  padding: 2rem 0;
+}
+
 // ── Responsive ──
 @media screen and (max-width: 600px) {
   .article-page {
@@ -116,5 +234,9 @@
 
   .article-subtitle {
     font-size: 1.0625rem;
+  }
+
+  .responses-header {
+    font-size: 1.125rem;
   }
 }

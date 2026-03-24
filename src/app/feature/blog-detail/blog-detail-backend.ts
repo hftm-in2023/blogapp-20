@@ -26,6 +26,8 @@ const BlogDetailSchema = z.object({
 
 export type BlogDetail = z.infer<typeof BlogDetailSchema>;
 
+export type Comment = z.infer<typeof CommentSchema>;
+
 @Injectable({
   providedIn: 'root',
 })
@@ -37,5 +39,14 @@ export class BlogDetailBackend {
       this.#httpClient.get(`${environment.bffUrl}/entries/${id}`),
     );
     return BlogDetailSchema.parse(data);
+  }
+
+  addComment(entryId: number, content: string): Promise<void> {
+    return lastValueFrom(
+      this.#httpClient.post<void>(
+        `${environment.bffUrl}/entries/${entryId}/comments`,
+        { content },
+      ),
+    );
   }
 }
