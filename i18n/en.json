@@ -24,7 +24,8 @@
     "TAB_LIKED": "Liked",
     "SEARCH_PLACEHOLDER": "Search posts...",
     "NO_RESULTS": "No posts found.",
-    "NO_RESULTS_LIKED": "You must log in and like a blog to see any content here."
+    "NO_RESULTS_LIKED": "You must log in and like a blog to see any content here.",
+    "LIKE_LOGIN_REQUIRED": "You can only like when you are logged in"
   },
   "DETAIL": {
     "CATEGORY": "Article",

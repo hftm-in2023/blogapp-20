@@ -24,7 +24,8 @@
     "TAB_LIKED": "Gefallen",
     "SEARCH_PLACEHOLDER": "Beiträge suchen...",
     "NO_RESULTS": "Keine Beiträge gefunden.",
-    "NO_RESULTS_LIKED": "Sie müssen sich anmelden und einen Blog liken, um hier Inhalte zu sehen."
+    "NO_RESULTS_LIKED": "Sie müssen sich anmelden und einen Blog liken, um hier Inhalte zu sehen.",
+    "LIKE_LOGIN_REQUIRED": "Sie können nur liken, wenn Sie angemeldet sind"
   },
   "DETAIL": {
     "CATEGORY": "Artikel",

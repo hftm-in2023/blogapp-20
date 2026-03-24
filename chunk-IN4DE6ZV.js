@@ -1,0 +1,1 @@
+import{Bb as a,Cb as i,Xb as c,fb as o}from"./chunk-EW7FWPQ3.js";var t=class n{static \u0275fac=function(e){return new(e||n)};static \u0275cmp=o({type:n,selectors:[["app-page-not-found"]],decls:2,vars:0,template:function(e,d){e&1&&(a(0,"h1"),c(1,"Diese Seite konnte leider nicht gefunden werden."),i())},encapsulation:2,changeDetection:0})};export{t as default};
