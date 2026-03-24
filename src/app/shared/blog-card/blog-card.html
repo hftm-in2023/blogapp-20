@@ -33,6 +33,16 @@
           }
         </button>
         <button
+          class="card-action-btn"
+          (click)="$event.stopPropagation()"
+          aria-label="Comments"
+        >
+          <mat-icon>chat_bubble_outline</mat-icon>
+          @if (model().comments > 0) {
+          <span class="action-count">{{ model().comments }}</span>
+          }
+        </button>
+        <button
           data-testid="share-button"
           class="card-action-btn"
           (click)="$event.stopPropagation()"

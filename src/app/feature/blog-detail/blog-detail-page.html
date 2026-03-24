@@ -30,6 +30,51 @@
     <p>{{ model().content }}</p>
   </div>
 
+  <section class="responses-section">
+    <h3 class="responses-header">
+      {{ "DETAIL.RESPONSES" | translate: { count: commentCount() } }}
+    </h3>
+
+    @if (isAuthenticated()) {
+    <div class="comment-input">
+      <textarea
+        class="comment-textarea"
+        [placeholder]="'DETAIL.COMMENT_PLACEHOLDER' | translate"
+        [value]="commentText()"
+        (input)="commentText.set($any($event.target).value)"
+        rows="3"
+        data-testid="comment-input"
+      ></textarea>
+      <div class="comment-input-actions">
+        <button
+          mat-flat-button
+          class="comment-publish-btn"
+          [disabled]="!commentText().trim() || submitting()"
+          (click)="onSubmit()"
+          data-testid="comment-submit"
+        >
+          {{ "DETAIL.COMMENT_PUBLISH" | translate }}
+        </button>
+      </div>
+    </div>
+    } @for (comment of comments(); track comment.id) {
+    <div class="comment-item" data-testid="comment-item">
+      <div class="comment-avatar">{{ commentInitials(comment) }}</div>
+      <div class="comment-body">
+        <div class="comment-meta">
+          <span class="comment-author">{{ comment.author }}</span>
+          <span class="comment-date"
+            >{{ formatCommentDate(comment.createdAt) }}</span
+          >
+        </div>
+        <p class="comment-content">{{ comment.content }}</p>
+      </div>
+    </div>
+    } @empty {
+    <p class="no-comments">{{ "DETAIL.NO_COMMENTS" | translate }}</p>
+    }
+  </section>
+
   <a class="back-link" [routerLink]="['/overview']"
     >{{ "DETAIL.BACK_TO_OVERVIEW" | translate }}</a
   >
