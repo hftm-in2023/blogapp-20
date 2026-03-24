@@ -6,7 +6,9 @@ import {
   input,
   signal,
 } from '@angular/core';
-import { TranslatePipe } from '@ngx-translate/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { AuthStore } from '../../core/auth';
 import { BlogCard } from '../../shared/blog-card/blog-card';
 import { BlogBackend } from './blog-backend';
 
@@ -38,6 +40,9 @@ type Model = {
 })
 export default class BlogOverviewPage {
   readonly #blogBackend = inject(BlogBackend);
+  readonly #authStore = inject(AuthStore);
+  readonly #snackBar = inject(MatSnackBar);
+  readonly #translate = inject(TranslateService);
 
   protected readonly model = input.required<Model>();
   protected readonly tab = input<string>('home');
@@ -70,6 +75,15 @@ export default class BlogOverviewPage {
   });
 
   async likeBlog($event: { id: number; likedByMe: boolean }) {
+    if (!this.#authStore.isAuthenticated()) {
+      this.#snackBar.open(
+        this.#translate.instant('OVERVIEW.LIKE_LOGIN_REQUIRED'),
+        '',
+        { duration: 3000 },
+      );
+      return;
+    }
+
     const toggled = !$event.likedByMe;
     const entry = this.model().data.find((e) => e.id === $event.id);
     if (!entry) return;
