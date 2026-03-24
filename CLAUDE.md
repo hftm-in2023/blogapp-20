@@ -150,6 +150,7 @@ bff/src/
 - **Clean Code principles** — meaningful names, small focused functions, single responsibility, no dead code, no unnecessary abstractions
 - **Reactive/declarative over imperative** — prefer declarative expressions (signal `computed()`, RxJS pipelines, array methods like `map`/`filter`) over imperative control flow (`for` loops, manual state mutations, step-by-step procedural logic)
 - **async/await over promise chains** — always use `async`/`await` instead of `.then()` chains, except when using `Promise.all()` for parallel loading
+- **Signals over RxJS** — prefer Angular signals (`signal()`, `computed()`, `effect()`) over RxJS Observables. When RxJS is unavoidable (e.g. `HttpClient`, router events), wrap it in reusable signal-based utilities in `core/utils/` (see `debouncedEffect`, `queryParamSignal`, `breakpointSignal`, `onNavigation`)
 
 ## Code Conventions
 
