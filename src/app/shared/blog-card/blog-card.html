@@ -44,11 +44,16 @@
         </button>
         <button
           data-testid="share-button"
+          [share]="{
+            title: model().title,
+            commands: routeCommands(),
+            pictureUrl: model().headerImageUrl || 'https://picsum.photos/seed/' + model().id + '/232/200'
+          }"
           class="card-action-btn"
           (click)="$event.stopPropagation()"
           aria-label="Share this article"
         >
-          <mat-icon>bookmark_border</mat-icon>
+          <mat-icon>share</mat-icon>
         </button>
       </div>
     </div>

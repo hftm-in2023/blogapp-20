@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
+import { ShareDirective } from '../share/share';
 
 export type Blog = {
   author: string;
@@ -28,7 +29,7 @@ export type Blog = {
   templateUrl: './blog-card.html',
   styleUrls: ['./blog-card.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [RouterLink, MatIconModule],
+  imports: [RouterLink, MatIconModule, ShareDirective],
 })
 export class BlogCard {
   readonly #locale = inject(LOCALE_ID);
