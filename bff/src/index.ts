@@ -5,3 +5,4 @@ import './functions/auth-refresh.js';
 import './functions/proxy-entries.js';
 import './functions/proxy-entry-by-id.js';
 import './functions/proxy-like.js';
+import './functions/proxy-comment.js';
