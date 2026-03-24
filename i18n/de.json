@@ -10,11 +10,21 @@
     "DARK_MODE": "Dunkler Modus",
     "LOGOUT": "Abmelden",
     "LOGIN": "Anmelden",
-    "TOGGLE_THEME": "Design wechseln"
+    "TOGGLE_THEME": "Design wechseln",
+    "TRENDING": "Im Trend",
+    "LIKED": "Gefallen",
+    "SEARCH": "Suche",
+    "SEARCH_PLACEHOLDER": "Beiträge suchen..."
   },
   "OVERVIEW": {
     "TITLE": "Entdecken",
-    "SUBTITLE": "Geschichten, Ideen und Perspektiven von unserer Community."
+    "SUBTITLE": "Geschichten, Ideen und Perspektiven von unserer Community.",
+    "TAB_HOME": "Startseite",
+    "TAB_TRENDING": "Im Trend",
+    "TAB_LIKED": "Gefallen",
+    "SEARCH_PLACEHOLDER": "Beiträge suchen...",
+    "NO_RESULTS": "Keine Beiträge gefunden.",
+    "NO_RESULTS_LIKED": "Sie müssen sich anmelden und einen Blog liken, um hier Inhalte zu sehen."
   },
   "DETAIL": {
     "CATEGORY": "Artikel",
