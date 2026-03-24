@@ -23,7 +23,8 @@
 .card-image-wrapper {
   position: relative;
   overflow: hidden;
-  aspect-ratio: 8 / 5;
+  flex: 1;
+  min-height: 0;
 }
 
 .card-image {
@@ -51,8 +52,12 @@
   font-weight: 700;
   line-height: 1.3;
   color: var(--mat-sys-on-surface);
-  margin: 0 0 0.5rem;
+  margin: 0 0 1rem;
   letter-spacing: -0.01em;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .card-preview {
@@ -60,7 +65,7 @@
   font-size: 0.9375rem;
   line-height: 1.5;
   color: var(--mat-sys-on-surface-variant);
-  margin: 0 0 0.75rem;
+  margin: 0 0 1rem;
   flex: 1;
   display: -webkit-box;
   -webkit-line-clamp: 3;
@@ -102,7 +107,7 @@
   color: var(--mat-sys-on-surface-variant);
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  margin: 0 0 0.25rem;
+  margin: 0 0 0.5rem;
 }
 
 .card-author {
@@ -160,6 +165,7 @@
   @media screen and (min-width: 480px) {
     .editorial-card {
       width: 360px;
+      height: 520px;
     }
   }
 }
