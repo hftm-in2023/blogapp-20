@@ -39,7 +39,8 @@
     "FIELD_TITLE": "Title",
     "FIELD_TITLE_PLACEHOLDER": "Give your post a title...",
     "FIELD_CONTENT": "Tell your story...",
-    "NAVIGATION_BACK_TITLE": "Back to overview"
+    "NAVIGATION_BACK_TITLE": "Back to overview",
+    "ADD_IMAGE": "Add header image"
   },
   "FOOTER": {
     "COPYRIGHT": "© 2024 The Record Editorial. All rights reserved.",

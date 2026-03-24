@@ -39,7 +39,8 @@
     "FIELD_TITLE": "Titel",
     "FIELD_TITLE_PLACEHOLDER": "Geben Sie Ihrem Beitrag einen Titel...",
     "FIELD_CONTENT": "Erzählen Sie Ihre Geschichte...",
-    "NAVIGATION_BACK_TITLE": "Zurück zur Übersicht"
+    "NAVIGATION_BACK_TITLE": "Zurück zur Übersicht",
+    "ADD_IMAGE": "Titelbild hinzufügen"
   },
   "FOOTER": {
     "COPYRIGHT": "© 2024 The Record Editorial. Alle Rechte vorbehalten.",
