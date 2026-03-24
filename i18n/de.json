@@ -29,7 +29,11 @@
   "DETAIL": {
     "CATEGORY": "Artikel",
     "PUBLISHED_ON": "Veröffentlicht am {{ value }}",
-    "BACK_TO_OVERVIEW": "Zurück zur Übersicht"
+    "BACK_TO_OVERVIEW": "Zurück zur Übersicht",
+    "RESPONSES": "Kommentare ({{ count }})",
+    "COMMENT_PLACEHOLDER": "Was denken Sie?",
+    "COMMENT_PUBLISH": "Veröffentlichen",
+    "NO_COMMENTS": "Noch keine Kommentare. Teilen Sie als Erster Ihre Gedanken."
   },
   "ADD_BLOG": {
     "TITLE": "Neuen Beitrag verfassen",
