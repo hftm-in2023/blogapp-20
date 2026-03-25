@@ -8,7 +8,7 @@ async function proxyLike(request: HttpRequest): Promise<HttpResponseInit> {
   if (preflight) return preflight;
 
   const csrf = checkCsrf(request);
-  if (csrf) return csrf;
+  if (csrf) return { ...csrf, headers: { ...csrf.headers, ...corsHeaders } };
 
   const id = request.params.id;
   const result = await proxyToBackend(
@@ -27,6 +27,6 @@ async function proxyLike(request: HttpRequest): Promise<HttpResponseInit> {
 app.http('proxy-like', {
   methods: ['PUT', 'OPTIONS'],
   authLevel: 'anonymous',
-  route: 'entries/{id}/like',
+  route: 'entries/{id:int}/like',
   handler: proxyLike,
 });

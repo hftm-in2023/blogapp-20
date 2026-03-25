@@ -48,7 +48,10 @@ export async function proxyToBackend(
         return {
           status: 401,
           body: { error: 'Session expired' },
-          headers: {},
+          headers: {
+            'Set-Cookie':
+              '__session=; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=0',
+          },
         };
       }
     }

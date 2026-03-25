@@ -8,7 +8,7 @@ async function proxyComment(request: HttpRequest): Promise<HttpResponseInit> {
   if (preflight) return preflight;
 
   const csrf = checkCsrf(request);
-  if (csrf) return csrf;
+  if (csrf) return { ...csrf, headers: { ...csrf.headers, ...corsHeaders } };
 
   const id = request.params.id;
   const result = await proxyToBackend(
