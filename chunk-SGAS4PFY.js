@@ -1,0 +1,1 @@
+import{Eb as o,Fb as a,_b as i,fb as n}from"./chunk-357CKTDH.js";var t=class r{static \u0275fac=function(e){return new(e||r)};static \u0275cmp=n({type:r,selectors:[["app-error"]],decls:2,vars:0,template:function(e,s){e&1&&(o(0,"h1"),i(1,"Oops! Something went wrong."),a())},encapsulation:2,changeDetection:0})};export{t as default};
