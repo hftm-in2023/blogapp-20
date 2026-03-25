@@ -1,11 +1,15 @@
 <article class="editorial-card" [routerLink]="routeCommands()">
   <div class="card-image-wrapper">
+    @defer (on viewport) {
     <img
       class="card-image"
       [src]="model().headerImageUrl || 'https://picsum.photos/seed/' + model().id + '/600/400'"
       alt="Article cover"
       loading="lazy"
     />
+    } @placeholder {
+    <div class="card-image-placeholder"></div>
+    }
   </div>
   <div class="card-body">
     <span class="card-date">{{ formattedDate() }}</span>
