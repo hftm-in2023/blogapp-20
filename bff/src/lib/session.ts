@@ -34,7 +34,13 @@ export function parseCookie(cookieHeader: string | null): string | null {
     .split(';')
     .map((c) => c.trim())
     .find((c) => c.startsWith(`${COOKIE_NAME}=`));
-  return match ? match.substring(COOKIE_NAME.length + 1) : null;
+  if (!match) return null;
+  const raw = match.substring(COOKIE_NAME.length + 1);
+  try {
+    return decodeURIComponent(raw);
+  } catch {
+    return raw;
+  }
 }
 
 export function sessionCookie(sealed: string): Cookie {
