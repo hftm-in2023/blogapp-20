@@ -1,9 +1,11 @@
-import { app, HttpRequest, HttpResponseInit } from '@azure/functions';
+import { app, Cookie, HttpRequest, HttpResponseInit } from '@azure/functions';
 import {
   parseCookie,
   unsealSession,
   isSessionExpired,
   sealSession,
+  sessionCookie,
+  clearSessionCookieObj,
 } from '../lib/session.js';
 import { refreshTokens } from '../lib/keycloak.js';
 import { corsHeaders, handlePreflight } from '../lib/cors.js';
@@ -29,15 +31,12 @@ async function authMe(request: HttpRequest): Promise<HttpResponseInit> {
     return {
       status: 200,
       jsonBody: { isAuthenticated: false, user: null },
-      headers: {
-        ...corsHeaders,
-        'Set-Cookie':
-          '__session=; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=0',
-      },
+      headers: corsHeaders,
+      cookies: [clearSessionCookieObj()],
     };
   }
 
-  const extraHeaders: Record<string, string> = {};
+  const extraCookies: Cookie[] = [];
 
   if (isSessionExpired(session)) {
     try {
@@ -48,17 +47,13 @@ async function authMe(request: HttpRequest): Promise<HttpResponseInit> {
         expiresAt: Date.now() + tokens.expires_in * 1000,
       };
       const newSealed = await sealSession(session);
-      extraHeaders['Set-Cookie'] =
-        `__session=${newSealed}; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=86400`;
+      extraCookies.push(sessionCookie(newSealed));
     } catch {
       return {
         status: 200,
         jsonBody: { isAuthenticated: false, user: null },
-        headers: {
-          ...corsHeaders,
-          'Set-Cookie':
-            '__session=; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=0',
-        },
+        headers: corsHeaders,
+        cookies: [clearSessionCookieObj()],
       };
     }
   }
@@ -82,7 +77,8 @@ async function authMe(request: HttpRequest): Promise<HttpResponseInit> {
           : [],
       },
     },
-    headers: { ...corsHeaders, ...extraHeaders },
+    headers: corsHeaders,
+    cookies: extraCookies.length > 0 ? extraCookies : undefined,
   };
 }
 

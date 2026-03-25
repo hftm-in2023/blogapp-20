@@ -1,6 +1,6 @@
 import { app, HttpRequest, HttpResponseInit } from '@azure/functions';
 import { authenticateUser } from '../lib/keycloak.js';
-import { sealSession } from '../lib/session.js';
+import { sealSession, sessionCookie } from '../lib/session.js';
 import { checkCsrf } from '../lib/csrf.js';
 import { corsHeaders, handlePreflight } from '../lib/cors.js';
 import { decodeJwt } from 'jose';
@@ -53,10 +53,8 @@ async function authLogin(request: HttpRequest): Promise<HttpResponseInit> {
             : [],
         },
       },
-      headers: {
-        ...corsHeaders,
-        'Set-Cookie': `__session=${sealed}; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=86400`,
-      },
+      headers: corsHeaders,
+      cookies: [sessionCookie(sealed)],
     };
   } catch (error) {
     return {

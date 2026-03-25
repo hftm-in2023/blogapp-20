@@ -1,5 +1,11 @@
 import { app, HttpRequest, HttpResponseInit } from '@azure/functions';
-import { parseCookie, unsealSession, sealSession } from '../lib/session.js';
+import {
+  parseCookie,
+  unsealSession,
+  sealSession,
+  sessionCookie,
+  clearSessionCookieObj,
+} from '../lib/session.js';
 import { refreshTokens } from '../lib/keycloak.js';
 import { checkCsrf } from '../lib/csrf.js';
 import { corsHeaders, handlePreflight } from '../lib/cors.js';
@@ -42,20 +48,15 @@ async function authRefresh(request: HttpRequest): Promise<HttpResponseInit> {
     return {
       status: 200,
       jsonBody: { refreshed: true },
-      headers: {
-        ...corsHeaders,
-        'Set-Cookie': `__session=${newSealed}; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=86400`,
-      },
+      headers: corsHeaders,
+      cookies: [sessionCookie(newSealed)],
     };
   } catch {
     return {
       status: 401,
       jsonBody: { error: 'Refresh failed' },
-      headers: {
-        ...corsHeaders,
-        'Set-Cookie':
-          '__session=; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=0',
-      },
+      headers: corsHeaders,
+      cookies: [clearSessionCookieObj()],
     };
   }
 }

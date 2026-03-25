@@ -1,5 +1,9 @@
 import { app, HttpRequest, HttpResponseInit } from '@azure/functions';
-import { parseCookie, unsealSession } from '../lib/session.js';
+import {
+  parseCookie,
+  unsealSession,
+  clearSessionCookieObj,
+} from '../lib/session.js';
 import { revokeToken } from '../lib/keycloak.js';
 import { checkCsrf } from '../lib/csrf.js';
 import { corsHeaders, handlePreflight } from '../lib/cors.js';
@@ -26,11 +30,8 @@ async function authLogout(request: HttpRequest): Promise<HttpResponseInit> {
   return {
     status: 200,
     jsonBody: { isAuthenticated: false },
-    headers: {
-      ...corsHeaders,
-      'Set-Cookie':
-        '__session=; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=0',
-    },
+    headers: corsHeaders,
+    cookies: [clearSessionCookieObj()],
   };
 }
 

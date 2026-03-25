@@ -12,7 +12,8 @@ async function proxyEntryById(request: HttpRequest): Promise<HttpResponseInit> {
   return {
     status: result.status,
     jsonBody: result.body,
-    headers: { ...corsHeaders, ...result.headers },
+    headers: corsHeaders,
+    cookies: result.cookies.length > 0 ? result.cookies : undefined,
   };
 }
 

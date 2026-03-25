@@ -1,4 +1,5 @@
 import * as Iron from '@hapi/iron';
+import type { Cookie } from '@azure/functions';
 
 const SESSION_SECRET = process.env.SESSION_SECRET!;
 const COOKIE_NAME = '__session';
@@ -7,7 +8,7 @@ export type SessionData = {
   accessToken: string;
   refreshToken: string;
   expiresAt: number;
-}
+};
 
 export async function sealSession(data: SessionData): Promise<string> {
   return Iron.seal(data, SESSION_SECRET, Iron.defaults);
@@ -36,25 +37,30 @@ export function parseCookie(cookieHeader: string | null): string | null {
   return match ? match.substring(COOKIE_NAME.length + 1) : null;
 }
 
-export function setSessionCookie(
-  sealed: string,
-  headers: Record<string, string>,
-): void {
-  headers['Set-Cookie'] =
-    `${COOKIE_NAME}=${sealed}; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=86400`;
+export function sessionCookie(sealed: string): Cookie {
+  return {
+    name: COOKIE_NAME,
+    value: sealed,
+    httpOnly: true,
+    secure: true,
+    sameSite: 'Lax',
+    path: '/',
+    maxAge: 86400,
+  };
 }
 
-export function clearSessionCookie(headers: Record<string, string>): void {
-  headers['Set-Cookie'] =
-    `${COOKIE_NAME}=; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=0`;
+export function clearSessionCookieObj(): Cookie {
+  return {
+    name: COOKIE_NAME,
+    value: '',
+    httpOnly: true,
+    secure: true,
+    sameSite: 'Lax',
+    path: '/',
+    maxAge: 0,
+  };
 }
 
 export function isSessionExpired(session: SessionData): boolean {
   return Date.now() >= session.expiresAt;
-}
-
-export function sessionToHeaders(sealed: string): Record<string, string> {
-  const headers: Record<string, string> = {};
-  setSessionCookie(sealed, headers);
-  return headers;
 }

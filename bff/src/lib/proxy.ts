@@ -1,9 +1,11 @@
-import { HttpRequest } from '@azure/functions';
+import { Cookie, HttpRequest } from '@azure/functions';
 import {
   parseCookie,
   unsealSession,
   isSessionExpired,
   sealSession,
+  sessionCookie,
+  clearSessionCookieObj,
   SessionData,
 } from './session.js';
 import { refreshTokens } from './keycloak.js';
@@ -14,6 +16,7 @@ type ProxyResult = {
   status: number;
   body: unknown;
   headers: Record<string, string>;
+  cookies: Cookie[];
 };
 
 export async function proxyToBackend(
@@ -23,7 +26,7 @@ export async function proxyToBackend(
 ): Promise<ProxyResult> {
   const cookieHeader = request.headers.get('cookie');
   const sealed = parseCookie(cookieHeader);
-  const responseHeaders: Record<string, string> = {};
+  const responseCookies: Cookie[] = [];
 
   let session: SessionData | null = null;
   if (sealed) {
@@ -42,16 +45,13 @@ export async function proxyToBackend(
           expiresAt: Date.now() + tokens.expires_in * 1000,
         };
         const newSealed = await sealSession(session);
-        responseHeaders['Set-Cookie'] =
-          `__session=${newSealed}; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=86400`;
+        responseCookies.push(sessionCookie(newSealed));
       } catch {
         return {
           status: 401,
           body: { error: 'Session expired' },
-          headers: {
-            'Set-Cookie':
-              '__session=; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=0',
-          },
+          headers: {},
+          cookies: [clearSessionCookieObj()],
         };
       }
     }
@@ -88,6 +88,7 @@ export async function proxyToBackend(
   return {
     status: backendRes.status,
     body: responseBody,
-    headers: responseHeaders,
+    headers: {},
+    cookies: responseCookies,
   };
 }
