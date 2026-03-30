@@ -125,10 +125,6 @@ export class SidebarComponent {
     this.#searchText.set(value);
   }
 
-  protected onDrawerSearch(value: string): void {
-    this.#navigateOverview(this.activeTab(), value);
-  }
-
   #navigateOverview(tab: string | undefined, search: string): void {
     const queryParams: Record<string, string | null> = {};
     queryParams['tab'] = tab === 'home' || !tab ? null : tab;

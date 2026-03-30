@@ -60,10 +60,10 @@
       </div>
       <div class="sidenav-search">
         <input
+          [value]="searchText()"
           [placeholder]="'SIDEBAR.SEARCH_PLACEHOLDER' | translate"
-          (keydown.enter)="
-            onDrawerSearch($any($event.target).value); drawer.close()
-          "
+          (input)="onSearchInput($any($event.target).value)"
+          (keydown.enter)="drawer.close()"
         />
       </div>
       <mat-divider></mat-divider>
