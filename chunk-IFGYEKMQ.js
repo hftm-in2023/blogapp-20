@@ -1,0 +1,1 @@
+import{a as t}from"./chunk-4JRMHNYZ.js";import"./chunk-G5NMXXJE.js";import"./chunk-QP6EKXAJ.js";import"./chunk-X6QWDK6J.js";import{_ as e,m as o}from"./chunk-SSWEKCVH.js";var m=r=>{let l=e(t),i=Number(r.params.id);return o(l.getEntry(i))},d=[{path:"",resolve:{model:m},loadComponent:()=>import("./chunk-VSH3XOR5.js")}];export{d as default};
